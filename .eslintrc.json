@@ -1,0 +1,63 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "import/prefer-default-export": 0,
+    "class-methods-use-this": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".ts", ".tsx", ".js", ".jsx"] }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "no-underscore-dangle": [
+      "error",
+      { "allow": ["__filename", "__dirname"] }
+    ],
+    "no-unused-vars": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+
+  "env": {
+    "browser": true,
+    "node": true
+  },
+
+  "globals": {
+    "cy": false,
+    "Cypress": false,
+    "describe": false,
+    "context": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "it": false,
+    "assert": false,
+    "expect": false,
+    "NodeJS": true
+  },
+
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
