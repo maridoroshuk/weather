@@ -53,7 +53,8 @@
     "it": false,
     "assert": false,
     "expect": false,
-    "NodeJS": true
+    "NodeJS": true,
+    "google": true
   },
 
   "parser": "@typescript-eslint/parser",

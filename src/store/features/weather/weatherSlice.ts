@@ -1,4 +1,4 @@
-import { IForecast } from '@interfaces/weather';
+import { IForecast } from 'src/types/weather';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@store/index';
 

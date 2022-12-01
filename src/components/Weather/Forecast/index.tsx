@@ -1,6 +1,6 @@
 import React from 'react';
 import { WEEK_DAYS } from '@constants/weekDays';
-import { IForecast } from '@interfaces/weather';
+import { IForecast } from 'src/types/weather';
 import {
   Container,
   DailyItem,

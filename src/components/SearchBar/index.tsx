@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
-import { ISearch } from '@interfaces/search';
+import { ISearch } from 'src/types/search';
 import { geoApiOptions, GEO_API_URL } from '@constants/api';
 import { Container } from './styled';
 

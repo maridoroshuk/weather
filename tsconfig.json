@@ -19,13 +19,13 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@store/*": ["src/store/*"],
-      "@interfaces/*": ["src/interfaces/*"],
+      "@types/*": ["src/types/*"],
       "@constants/*": ["src/constants/*"],
       "@services/*": ["src/services/*"],
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "types.d.ts"],
   "exclude": ["node_modules", "src/**/*.spec.ts"]
 }

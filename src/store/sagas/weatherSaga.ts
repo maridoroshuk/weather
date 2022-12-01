@@ -2,6 +2,7 @@ import {
   put,
   call,
   takeLatest,
+  CallEffect,
 } from '@redux-saga/core/effects';
 import getCurrentWeather from '@services/weather/current';
 import getForecast from '@services/weather/forecast';

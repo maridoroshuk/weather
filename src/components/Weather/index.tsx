@@ -1,4 +1,4 @@
-import { IForecast } from '@interfaces/weather';
+import { IForecast } from 'src/types/weather';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import CurrentWeather from './CurrentWeather';

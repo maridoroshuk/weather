@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBar from '@components/SearchBar';
-import { ISearch } from '@interfaces/search';
+import { ISearch } from 'src/types/search';
 import { getWeatherRequest } from '@store/features/weather/weatherSlice';
 import Weather from '@components/Weather';
-import Time from '@components/Time';
+import TimeCity from '@components/TimeCity';
+import Calendar from '@components/Calendar';
 
 function Home() {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ function Home() {
   return (
     <>
       <SearchBar onSearchChange={handleSearchChange} />
-      <Time />
+      <TimeCity />
+      <Calendar />
       <Weather />
     </>
   );
