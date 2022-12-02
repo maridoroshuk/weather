@@ -2,29 +2,14 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 
 interface ILoginProps {
-  onGoogleResponse: (res: any) => void;
-  onResponseError: (err: string) => void;
+  onLogin: () => void;
 }
 
-function Login({
-  onGoogleResponse,
-  onResponseError,
-}: ILoginProps) {
-  const responseGoogle = (res: any) => {
-    onGoogleResponse(res);
-  };
-
-  const responseError = () => {
-    onResponseError('Login Failed');
-  };
-
+function Login({ onLogin }: ILoginProps) {
   return (
-    <div>
-      <GoogleLogin
-        onSuccess={responseGoogle}
-        onError={responseError}
-      />
-    </div>
+    <button type="button" onClick={onLogin}>
+      Sign in with Google
+    </button>
   );
 }
 

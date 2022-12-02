@@ -15,6 +15,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.0",
     "@types/yargs": "^17.0.15",
     "@typescript-eslint/parser": "^5.45.0",
     "craco": "^0.0.3",
@@ -27,6 +28,7 @@
     "module-alias": "^2.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-calendar-api": "^2.1.0",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "react-select": "^5.6.1",
@@ -36,6 +38,7 @@
     "redux-saga": "^1.2.1",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.3",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4",
     "yargs": "^17.6.2"
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBar from '@components/SearchBar';
-import { ISearch } from 'src/types/search';
+import { ISearch } from 'src/customTypes/search';
 import { getWeatherRequest } from '@store/features/weather/weatherSlice';
 import Weather from '@components/Weather';
 import TimeCity from '@components/TimeCity';

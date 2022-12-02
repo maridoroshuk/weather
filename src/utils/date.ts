@@ -13,3 +13,14 @@ export function getDate(date: Date) {
     day: 'numeric',
   });
 }
+
+export const getEndOfDayDate: Date = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate(),
+  23,
+  59,
+  59,
+);
+
+export const getTaskTime = (date: string): string => new Date(date).toLocaleTimeString();

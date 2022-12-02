@@ -1,6 +1,7 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { WEEK_DAYS } from '@constants/weekDays';
-import { IForecast } from 'src/types/weather';
+import { IForecast } from 'src/customTypes/weather';
 import {
   Container,
   DailyItem,
@@ -23,7 +24,7 @@ function Forecast({ forecast }: ForecastProps) {
   return (
     <Container>
       {forecast.map((item, index) => (
-        <DailyItem>
+        <DailyItem key={uuidv4()}>
           <DayTitle>{forecastDays[index]}</DayTitle>
           <WeatherIconSmall
             alt="weather"

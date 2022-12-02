@@ -2616,6 +2616,11 @@
   "resolved" "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   "version" "0.0.3"
 
+"@types/uuid@^9.0.0":
+  "integrity" "sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q=="
+  "resolved" "https://registry.npmjs.org/@types/uuid/-/uuid-9.0.0.tgz"
+  "version" "9.0.0"
+
 "@types/vinyl@^2.0.4":
   "integrity" "sha512-4UqPv+2567NhMQuMLdKAyK4yzrfCqwaTt6bLhHEs8PFcxbHILsrxaY63n4wgE/BRLDWDQeI+WcTmkXKExh9hQg=="
   "resolved" "https://registry.npmjs.org/@types/vinyl/-/vinyl-2.0.7.tgz"
@@ -10776,6 +10781,11 @@
   "integrity" "sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg=="
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
+
+"react-google-calendar-api@^2.1.0":
+  "integrity" "sha512-o1zUYM/ZpV1MfiGrQHZa0tlq+wY4iQ5/JfNzFi+uzmrtaxB89CVqsER3hAgbJuHomjJn8/9XQkgmL0yH2xsOTA=="
+  "resolved" "https://registry.npmjs.org/react-google-calendar-api/-/react-google-calendar-api-2.1.0.tgz"
+  "version" "2.1.0"
 
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="

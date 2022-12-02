@@ -1,6 +1,5 @@
-import { IForecast } from 'src/types/weather';
+import { IForecast } from 'src/customTypes/weather';
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@store/index';
 
 interface WeatherState {
   search: {
@@ -58,7 +57,5 @@ export const {
   getWeatherSuccess,
   getWeatherFailure,
 } = weatherSlice.actions;
-
-export const selectCount = (state: RootState) => state.weather;
 
 export default weatherSlice.reducer;
