@@ -1,9 +1,7 @@
 import { WEATHER_API_URL } from '@constants/api';
+import { IForecast } from '@customTypes/weather';
 
-interface ServerResponse {
-  temperature: number;
-  icon: string;
-}
+type ServerResponse = IForecast[];
 
 const getForecast = async (
   lat: number,
@@ -13,7 +11,8 @@ const getForecast = async (
     `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`,
   );
   const data = await response.json();
-  return data.list.splice(0, 7);
+  const forecast = data.list.splice(0, 7);
+  return forecast;
 };
 
 export default getForecast;

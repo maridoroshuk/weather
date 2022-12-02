@@ -1,7 +1,6 @@
+import ApiCalendar from 'react-google-calendar-api';
 import { IEvent } from '@customTypes/events';
 import { getEndOfDayDate } from '@utils/date';
-
-const { gapi } = window;
 
 interface ServerResponse {
   items: IEvent[];
@@ -17,11 +16,12 @@ const request = {
   orderBy: 'startTime',
 };
 
-const getEventsList = async (): Promise<ServerResponse> => {
-  const response = await gapi.client.calendar.events.list(
-    request,
-  );
-  return response.result.items;
+const getEventsList = async (
+  calendar: ApiCalendar,
+): Promise<ServerResponse> => {
+  const response = await calendar.listEvents(request);
+  const { items } = response.result;
+  return items;
 };
 
 export default getEventsList;
