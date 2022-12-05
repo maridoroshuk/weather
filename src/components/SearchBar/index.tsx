@@ -1,45 +1,41 @@
 import React, { useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
-import { ISearch } from 'src/customTypes/search';
-import { geoApiOptions, GEO_API_URL } from '@constants/api';
+import { IOptions } from 'src/customTypes/search';
+import { GEO_API_URL } from '@constants/api';
+import getCityStringFromResponse from '@utils/getCityStringFromResponse';
 import { Container } from './styled';
 
 type SearchBarProps = {
-  onSearchChange: (input: ISearch | null) => void;
+  onSearchChange: (input: IOptions | null) => void;
 };
 
 function SearchBar({ onSearchChange }: SearchBarProps) {
-  const [search, setSearch] = useState<ISearch | null>(
-    null,
-  );
+  const [value, setValue] = useState<IOptions | null>(null);
 
   const loadOptionsHandler = async (query: string) => {
     const response = await fetch(
-      `${GEO_API_URL}/cities?inPopulation=100000&namePrefix=${query}`,
-      geoApiOptions,
+      `${GEO_API_URL}/city?limit=30&name=${query}`,
+      {
+        method: 'GET',
+        headers: {
+          'X-API-Key': `${process.env.REACT_APP_NINJAS_API_KEY}`,
+        },
+      },
     );
 
     const data = await response.json();
+    const options = getCityStringFromResponse(data);
 
     return {
-      options: data.data.map(
-        (city: {
-          latitude: number;
-          longitude: number;
-          name: string;
-          countryCode: string;
-        }) => ({
-          value: `${city.latitude} ${city.longitude}`,
-          label: `${city.name}, ${city.countryCode}`,
-        }),
-      ),
+      options,
       hasMore: data.length >= 1,
     };
   };
 
-  const onChangeHandler = (input: ISearch | null) => {
-    setSearch(input);
+  const onChangeHandler = (input: any) => {
+    setValue(input);
     onSearchChange(input);
+    setValue(null);
   };
 
   return (
@@ -47,7 +43,7 @@ function SearchBar({ onSearchChange }: SearchBarProps) {
       <AsyncPaginate
         placeholder="Search for city"
         debounceTimeout={600}
-        value={search}
+        value={value}
         onChange={onChangeHandler}
         loadOptions={loadOptionsHandler}
       />

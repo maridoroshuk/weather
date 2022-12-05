@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import initializeGapiClient from '@utils/initializeGapiClient';
-import { getEventsRequest, setIsLoggedInd } from '@store/features/calendar/calendarSlice';
+import { getEventsRequest, setIsLoggedInd } from '@store/features/calendarSlice';
 import getTokenClient from '@utils/getTokenClient';
 import { IEvent } from '@customTypes/events';
 import Events from './Events';

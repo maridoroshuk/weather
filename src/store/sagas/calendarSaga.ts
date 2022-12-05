@@ -7,7 +7,7 @@ import {
   ForkEffect,
 } from '@redux-saga/core/effects';
 import getEventsList from '@services/calendar/getEventsList';
-import { getEventsFailure, getEventsRequest, getEventsSuccess } from '@store/features/calendar/calendarSlice';
+import { getEventsFailure, getEventsRequest, getEventsSuccess } from '@store/features/calendarSlice';
 
 function* calendarSagaWorker(): Generator<CallEffect | PutEffect, void> {
   try {

@@ -1,16 +1,17 @@
-import { IForecast } from 'src/customTypes/weather';
+import { APIOptions, APIType, IForecast } from 'src/customTypes/weather';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface WeatherState {
+export interface WeatherState {
   search: {
     lat: string | null;
     lon: string | null;
   };
   city: string | null;
   isLoading: boolean;
+  api: APIType;
   temp: number | null;
-  icon: string | null;
-  forecast: IForecast[],
+  code: number | null;
+  forecast: IForecast[];
   errorMessage: string | null;
 }
 
@@ -20,9 +21,10 @@ const initialState: WeatherState = {
     lon: null,
   },
   city: null,
+  api: APIOptions.OPENWEATHER,
   isLoading: false,
   temp: null,
-  icon: null,
+  code: null,
   forecast: [],
   errorMessage: null,
 };
@@ -41,13 +43,17 @@ export const weatherSlice = createSlice({
       ...state,
       isLoading: false,
       temp: action.payload.current.temp,
-      icon: action.payload.current.icon,
+      code: action.payload.current.code,
       forecast: action.payload.forecast,
     }),
     getWeatherFailure: (state, action) => ({
       ...state,
       isLoading: false,
       errorMessage: action.payload.message,
+    }),
+    updateWeatherAPI: (state, action) => ({
+      ...state,
+      api: action.payload.api,
     }),
   },
 });
@@ -56,6 +62,7 @@ export const {
   getWeatherRequest,
   getWeatherSuccess,
   getWeatherFailure,
+  updateWeatherAPI,
 } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

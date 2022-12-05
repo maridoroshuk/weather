@@ -6,8 +6,9 @@ import {
 } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import { configureStore } from '@reduxjs/toolkit';
-import weather from '@store/features/weather/weatherSlice';
-import calendar from '@store/features/calendar/calendarSlice';
+import weather from '@store/features/weatherSlice';
+import calendar from '@store/features/calendarSlice';
+import citySearchOptions from '@store/features/citySearchOptionsSlice';
 import rootSaga from '@store/sagas/rootSaga';
 
 const persistConfig = {
@@ -31,6 +32,7 @@ const store = configureStore({
   reducer: {
     weather,
     calendar,
+    citySearchOptions,
     persistedReducer,
   },
   middleware: [sagaMiddleware],

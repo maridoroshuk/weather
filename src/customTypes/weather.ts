@@ -6,3 +6,11 @@ export interface IForecast {
     icon: string | null;
   }[];
 }
+export enum APIOptions {
+  OPENWEATHER = 'OpenWeatherApi',
+  WEATHERBIT = 'WeatherBitAPI',
+}
+
+export type APIType =
+  | APIOptions.OPENWEATHER
+  | APIOptions.WEATHERBIT;

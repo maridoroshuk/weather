@@ -5,28 +5,36 @@ import {
   CallEffect,
   PutEffect,
   ForkEffect,
+  select,
+  SelectEffect,
 } from '@redux-saga/core/effects';
-import getCurrentWeather from '@services/weather/getCurrentWeather';
-import getForecast from '@services/weather/getForecast';
+import getWeatherOpenWeatherAPI from '@services/weather/getWeatherOpenWeatherAPI';
+import getOpenWeatherForecast from '@services/weather/getOpenWeatherForecast';
 import {
   getWeatherFailure,
   getWeatherRequest,
   getWeatherSuccess,
-} from '@store/features/weather/weatherSlice';
+} from '@store/features/weatherSlice';
+import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
+import { APIOptions } from '@customTypes/weather';
 
-function* weatherSagaWorker({
+function* openWeatherSagaWorker({
   payload,
-}: ReturnType<
-  typeof getWeatherRequest
->): Generator<CallEffect | PutEffect, void> {
+}: ReturnType<typeof getWeatherRequest>): Generator<
+  CallEffect | PutEffect | SelectEffect,
+  void
+> {
   try {
+    const api = yield select((state) => state.weather.api);
     const current = yield call(
-      getCurrentWeather,
+      api === APIOptions.OPENWEATHER
+        ? getWeatherOpenWeatherAPI
+        : getWeatherBitAPI,
       payload?.search?.lat,
       payload?.search?.lon,
     );
     const forecast = yield call(
-      getForecast,
+      getOpenWeatherForecast,
       payload?.search?.lat,
       payload?.search?.lon,
     );
@@ -41,7 +49,7 @@ function* weatherSagaWorker({
 function* watchWeatherSaga(): Generator<ForkEffect> {
   yield takeLatest(
     getWeatherRequest.type,
-    weatherSagaWorker,
+    openWeatherSagaWorker,
   );
 }
 

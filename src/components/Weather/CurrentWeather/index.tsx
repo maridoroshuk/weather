@@ -1,3 +1,5 @@
+import { APIOptions, APIType } from '@customTypes/weather';
+import getWeatherIcon from '@utils/getWeatherIcon';
 import React from 'react';
 import {
   Label,
@@ -9,12 +11,12 @@ import {
 
 interface CurrentWeatherProps {
   temp: number;
-  icon: string;
+  code: number;
 }
 
 function CurrentWeather({
   temp,
-  icon,
+  code,
 }: CurrentWeatherProps) {
   return (
     <Container>
@@ -22,7 +24,7 @@ function CurrentWeather({
         <Label>Today</Label>
         <WeatherIcon
           alt="weather"
-          src={`icons/${icon}.png`}
+          src={`icons/${getWeatherIcon(code)}.png`}
         />
       </Section>
       <Section>
