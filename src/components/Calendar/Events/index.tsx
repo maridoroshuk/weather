@@ -21,6 +21,7 @@ function Events({ events }: IEventsProps) {
             <DateString>
               {getTaskTime(event.start.dateTime)}
             </DateString>
+            <DateString> - </DateString>
             <DateString>
               {getTaskTime(event.end.dateTime)}
             </DateString>

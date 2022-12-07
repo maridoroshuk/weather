@@ -3,14 +3,8 @@ export const theme = {
     white: '#fffff',
     black: '#eeeee',
     transparent: 'transparent',
-    blue: '#8ecae6',
-  },
-
-  toastColors: {
-    purple: '#9f86c0',
-    yellow: '#fee440',
-    tomato: '#d62828',
-    green: '#57cc99',
+    blue: '#118ab2',
+    whitesmoke: '#f5f5f5',
   },
 
   spaces: {

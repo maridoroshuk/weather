@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  font-family: Roboto, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 `;

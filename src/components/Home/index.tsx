@@ -12,6 +12,7 @@ import {
 } from '@customTypes/weather';
 import getCurrenCity from '@utils/getCurrenCity';
 import Loader from '@components/Loader';
+import { Container } from './styled';
 
 function Home() {
   const dispatch = useDispatch();
@@ -74,7 +75,7 @@ function Home() {
   };
 
   return (
-    <>
+    <Container>
       {isCurrentLocationExist
         && currentLocation.currentCity && (
           <>
@@ -93,7 +94,7 @@ function Home() {
           </>
       )}
       {!isCurrentLocationExist && <Loader />}
-    </>
+    </Container>
   );
 }
 

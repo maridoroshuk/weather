@@ -8,9 +8,9 @@ import {
 } from '@store/features/calendarSlice';
 import { IEvent } from '@customTypes/calendar';
 import getApiCalendar from '@utils/getApiCalendar';
-
 import Events from './Events';
-import Login from './Login';
+import { Container } from './styled';
+import Button from './Button';
 
 function Calendar() {
   const dispatch = useDispatch();
@@ -44,11 +44,29 @@ function Calendar() {
     };
   };
 
+  const handleLogoutClick = () => {
+    apiCalendar.handleSignoutClick();
+    dispatch(setIsLoggedIn({ isLoggedIn: false }));
+  };
+
   return (
-    <>
-      {!isLoggedIn && <Login onLogin={handleAuthClick} />}
-      {events && <Events events={events} />}
-    </>
+    <Container>
+      {isLoggedIn && events && (
+        <>
+          <Events events={events} />
+          <Button
+            onClick={handleLogoutClick}
+            text="Logout"
+          />
+        </>
+      )}
+      {!isLoggedIn && (
+        <Button
+          onClick={handleAuthClick}
+          text="Login with Google"
+        />
+      )}
+    </Container>
   );
 }
 export default Calendar;
