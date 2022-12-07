@@ -1,47 +1,44 @@
+import { HEIGHT, WIDTH } from '@constants/sizes';
 import styled from 'styled-components';
 
 export const Container = styled.ul`
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-
+  gap: ${({ theme: { spaces } }) => `${spaces.l}px`};
   list-style-type: none;
 `;
 
 export const DailyItem = styled.li`
-  background-color: #f5f5f5;
-  border-radius: 1.2rem;
+  background-color: ${({ theme: { colors } }) => `${colors.whitesmoke}`};
+  border-radius: ${({ theme: { spaces } }) => `${spaces.xl}px`};
   flex-grow: 1;
-  heigth: 40px;
+  heigth: ${HEIGHT[40]};
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 0.4rem 0;
-  padding: 0.3rem 1.2rem;
-  @media (min-width: 600px) {
-  }
+  margin: ${({ theme: { spaces } }) => `${spaces.xxxs}px`} 0;
+  padding: ${({ theme: { spaces } }) => `${spaces.xxs}px ${spaces.xl}px`}
+    0;
 `;
 
 export const WeatherIconSmall = styled.img`
+  display: block;
+  width: ${WIDTH[100]};
   align-self: center;
-  width: 3rem;
-  @media (min-width: 600px) {
-    margin-right: 1rem;
-  }
 `;
 export const DayTitle = styled.label`
-  margin-top: 2rem;
-  color: #212121;
+  margin-top: ${({ theme: { spaces } }) => `${spaces.xl}px`};
+  color: ${({ theme: { colors } }) => `${colors.chromeBlack}`};
   flex: 1 1;
   font-weight: 600;
 `;
 
 export const Temperature = styled.p`
   font-weight: 600;
-  font-size: 2rem;
+  font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   flex: 1 1;
   width: auto;
-  letter-spacing: -0.2rem;
-  margin: 0.5rem;
+  letter-spacing: ${({ theme: { spaces } }) => `-${spaces.xs}px`};
+  margin: ${({ theme: { spaces } }) => `${spaces.s}px`};
 `;

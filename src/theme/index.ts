@@ -1,10 +1,16 @@
 export const theme = {
   colors: {
-    white: '#fffff',
-    black: '#eeeee',
+    white: '#fff',
+    black: '#eee',
+    chromeBlack: '##212121',
     transparent: 'transparent',
     blue: '#118ab2',
     whitesmoke: '#f5f5f5',
+    gray: '#808080',
+  },
+
+  colorsRGB: {
+    whiteTransparent: 'rgba(255,255,255, 0.7)',
   },
 
   spaces: {

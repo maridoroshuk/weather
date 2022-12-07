@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { WIDTH } from '@constants/sizes';
 
 export const Container = styled.div`
-  width: 100%;
   background-color: ${({ theme: { colors } }) => `${colors.whitesmoke}`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.s}px`};
   display: flex;

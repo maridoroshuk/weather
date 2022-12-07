@@ -1,14 +1,15 @@
+import { WIDTH } from '@constants/sizes';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 400px;
+  max-width: ${WIDTH[400]};
   flex-grow: 1;
-  border-radius: 0.5rem;
-  box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30%);
-  color: #fff;
-  background-color: #118ab2;
-  margin: 1.2rem auto;
-  padding: 1.2rem;
+  border-radius: ${({ theme: { spaces } }) => `${spaces.xl}px`};
+  box-shadow: ${({ theme: { spaces } }) => `${spaces.s}px -${spaces.xxs}px ${spaces.l}px ${spaces.s}px rgb(0 0 0 / 30%)`};
+  color: ${({ theme: { colors } }) => `${colors.white}`};
+  background-color: ${({ theme: { colors } }) => `${colors.blue}`};
+  margin: ${({ theme: { spaces } }) => `${spaces.l}px`} auto;
+  padding: ${({ theme: { spaces } }) => `${spaces.xl}px`};
 `;
 
 export const Section = styled.div`
@@ -23,29 +24,29 @@ export const Section = styled.div`
 
 export const City = styled.p`
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: ${({ theme: { fontSizes } }) => `${fontSizes.m}px`};
   line-heigth: 1;
   margin: 0;
-  letter-spacing: 1px;
+  letter-spacing: ${({ theme: { spaces } }) => `${spaces.xxxs}px`};
 `;
 
 export const Label = styled.h4`
   font-weight: 600;
-  font-size: 2rem;
+  font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   line-heigth: 1;
   margin: 0;
-  letter-spacing: 1px;
+  letter-spacing: ${({ theme: { spaces } }) => `${spaces.xxxs}px`};
   text-transform: uppercase;
 `;
 
 export const WeatherIcon = styled.img`
-  width: 8rem;
+  width: ${WIDTH[150]};
 `;
 
 export const Temperature = styled.p`
   font-weight: 600;
-  font-size: 5rem;
+  font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xxl}px`};
   width: auto;
-  letter-spacing: -0.2rem;
-  margin: 0.3rem 0;
+  letter-spacing: ${({ theme: { spaces } }) => `-${spaces.xxxs}px`};
+  margin: ${({ theme: { spaces } }) => `${spaces.xs}px`} 0;
 `;

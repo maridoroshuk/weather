@@ -1,7 +1,8 @@
+import { WIDTH } from '@constants/sizes';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    max-width: 1080px;
+    max-width: ${WIDTH[1080]};
     width: 80%;
-    margin: 1.2rem auto;
+    margin: ${({ theme: { spaces } }) => `${spaces.l}px`} auto;
 `;

@@ -2,7 +2,12 @@ import { APIOptions } from '@customTypes/weather';
 import { updateWeatherAPI } from '@store/features/weatherSlice';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Label, RadioInput } from './styled';
+import {
+  Container,
+  Label,
+  RadioInput,
+  Title,
+} from './styled';
 
 interface ISwitchWeatherAPI {
   onAPIChange: () => void;
@@ -23,22 +28,25 @@ function SwitchWeatherAPI({
   };
   return (
     <Container>
-      <RadioInput
-        type="radio"
-        id="openWeather"
-        value={APIOptions.OPENWEATHER}
-        onChange={handleAPIChange}
-        checked={activeIndex === 0}
-      />
-      <Label htmlFor="openWeather">OpenWeather</Label>
-      <RadioInput
-        type="radio"
-        id="weatherBit"
-        value={APIOptions.WEATHERBIT}
-        onChange={handleAPIChange}
-        checked={activeIndex === 1}
-      />
-      <Label htmlFor="weatherBit">WeatherBit</Label>
+      <Title>Weather service:</Title>
+      <div>
+        <RadioInput
+          type="radio"
+          id="openWeather"
+          value={APIOptions.OPENWEATHER}
+          onChange={handleAPIChange}
+          checked={activeIndex === 0}
+        />
+        <Label htmlFor="openWeather">OpenWeather</Label>
+        <RadioInput
+          type="radio"
+          id="weatherBit"
+          value={APIOptions.WEATHERBIT}
+          onChange={handleAPIChange}
+          checked={activeIndex === 1}
+        />
+        <Label htmlFor="weatherBit">WeatherBit</Label>
+      </div>
     </Container>
   );
 }

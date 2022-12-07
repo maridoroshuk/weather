@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '@components/SearchBar';
 import { getWeatherRequest } from '@store/features/weatherSlice';
 import Weather from '@components/Weather';
@@ -12,10 +12,18 @@ import {
 } from '@customTypes/weather';
 import getCurrenCity from '@utils/getCurrenCity';
 import Loader from '@components/Loader';
-import { Container } from './styled';
+import getWeatherIcon from '@utils/getWeatherIcon';
+import { Container, Wrapper } from './styled';
 
 function Home() {
   const dispatch = useDispatch();
+  const { code } = useSelector(
+    (state: {
+      weather: {
+        code: number | null;
+      };
+    }) => state.weather,
+  );
 
   const [currentLocation, setCurrentLocation] = useState<ICurrentLocation>({
     lat: null,
@@ -77,7 +85,7 @@ function Home() {
   return (
     <Container>
       {isCurrentLocationExist
-        && currentLocation.currentCity && (
+        && currentLocation.currentCity && code && (
           <>
             <SearchBar
               onSearchChange={handleSearchChange}
@@ -86,11 +94,18 @@ function Home() {
             <SwitchWeatherAPI
               onAPIChange={dispatchWeatherRequest}
             />
-            <TimeCity
-              defaultCity={currentLocation.currentCity}
-            />
-            <Calendar />
-            <Weather />
+            <Wrapper
+              style={{
+                backgroundImage:
+                  `url('./background/${getWeatherIcon(code)}.jpg')`,
+              }}
+            >
+              <TimeCity
+                defaultCity={currentLocation.currentCity}
+              />
+              <Calendar />
+              <Weather />
+            </Wrapper>
           </>
       )}
       {!isCurrentLocationExist && <Loader />}
