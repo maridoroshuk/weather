@@ -29,6 +29,7 @@ function Home() {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
+  const [currentLocation, setCurrentLocation] = useState<ICurrentLocation>()
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
       const { latitude, longitude } = pos.coords;

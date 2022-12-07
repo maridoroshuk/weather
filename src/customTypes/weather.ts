@@ -14,3 +14,8 @@ export enum APIOptions {
 export type APIType =
   | APIOptions.OPENWEATHER
   | APIOptions.WEATHERBIT;
+
+export interface IOptions {
+  value: string;
+  label: string;
+}

@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import initializeGapiClient from '@utils/initializeGapiClient';
-import { getEventsRequest, setIsLoggedInd } from '@store/features/calendar/calendarSlice';
-import getTokenClient from '@utils/getTokenClient';
+import ApiCalendar from 'react-google-calendar-api';
+import {
+  getEventsRequest,
+  setApiCalendar,
+  setIsLoggedIn,
+} from '@store/features/calendarSlice';
 import { IEvent } from '@customTypes/events';
+import getApiCalendar from '@utils/getApiCalendar';
+
 import Events from './Events';
 import Login from './Login';
 
@@ -28,11 +33,13 @@ function Calendar() {
 
   const handleAuthClick = () => {
     apiCalendar.handleAuthClick();
-    apiCalendar.tokenClient.callback = async (resp: any) => {
+    apiCalendar.tokenClient.callback = async (
+      resp: any,
+    ) => {
       if (resp.error !== undefined) {
         throw resp;
       }
-      dispatch(setIsLoggedInd());
+      dispatch(setIsLoggedIn({ isLoggedIn: true }));
       dispatch(getEventsRequest());
     };
   };

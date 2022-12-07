@@ -31,7 +31,8 @@
       { "allow": ["__filename", "__dirname"] }
     ],
     "no-unused-vars": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

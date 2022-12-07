@@ -41,9 +41,9 @@ export const calendarSlice = createSlice({
       ...state,
       apiCalendar: action.payload.apiCalendar,
     }),
-    setIsLoggedInd: (state) => ({
+    setIsLoggedIn: (state, action) => ({
       ...state,
-      isLoggedIn: true,
+      isLoggedIn: action.payload.isLoggedIn,
     }),
   },
 });
@@ -52,7 +52,7 @@ export const {
   getEventsRequest,
   getEventsSuccess,
   getEventsFailure,
-  setIsLoggedInd,
+  setIsLoggedIn,
   setApiCalendar,
 } = calendarSlice.actions;
 
