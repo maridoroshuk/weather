@@ -5,7 +5,11 @@ import { Container, Section } from './styled';
 import Time from './Time';
 import City from './City';
 
-function TimeCity() {
+interface ITimeCity {
+  defaultCity: string | null;
+}
+
+function TimeCity({ defaultCity }: ITimeCity) {
   const [date, setDate] = useState(() => new Date());
   const timer = useRef<null | NodeJS.Timeout>(null);
 
@@ -36,7 +40,11 @@ function TimeCity() {
       <Section>
         {time && day && <Time time={time} day={day} />}
       </Section>
-      <Section>{city && <City city={city} />}</Section>
+      <Section>
+        {city && (
+          <City city={defaultCity || city} />
+        )}
+      </Section>
     </Container>
   );
 }

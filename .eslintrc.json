@@ -32,7 +32,8 @@
     ],
     "no-unused-vars": "off",
     "no-shadow": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "consistent-return": "off"
   },
   "settings": {
     "import/resolver": {

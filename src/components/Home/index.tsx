@@ -1,56 +1,98 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBar from '@components/SearchBar';
-import { IOptions } from 'src/customTypes/search';
 import { getWeatherRequest } from '@store/features/weatherSlice';
 import Weather from '@components/Weather';
 import TimeCity from '@components/TimeCity';
 import Calendar from '@components/Calendar';
 import SwitchWeatherAPI from '@components/SwitchWeatherAPI';
+import {
+  ICurrentLocation,
+  IOptions,
+} from '@customTypes/weather';
+import getCurrenCity from '@utils/getCurrenCity';
+import Loader from '@components/Loader';
 
 function Home() {
   const dispatch = useDispatch();
 
-  const handleSearchChange = (search: IOptions | null) => {
-    if (search) {
-      const [lat, lon]: string[] = search.value.split(' ');
+  const [currentLocation, setCurrentLocation] = useState<ICurrentLocation>({
+    lat: null,
+    lon: null,
+    currentCity: null,
+  });
+
+  const isCurrentLocationExist = currentLocation.lat
+    && currentLocation.lon
+    && currentLocation.currentCity;
+
+  const dispatchWeatherRequest = () => {
+    if (isCurrentLocationExist) {
       dispatch(
         getWeatherRequest({
           search: {
-            lat,
-            lon,
+            lat: currentLocation.lat,
+            lon: currentLocation.lon,
           },
-          city: search.label,
+          city: currentLocation.currentCity,
         }),
       );
     }
   };
 
-  const [lat, setLat] = useState<number | null>(null);
-  const [lon, setLon] = useState<number | null>(null);
-
-  const [currentLocation, setCurrentLocation] = useState<ICurrentLocation>()
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const { latitude, longitude } = pos.coords;
-      dispatch(
-        getWeatherRequest({
-          search: {
-            lat: latitude,
-            lon: longitude,
-          },
-        }),
-      );
-    });
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const currentCity = await getCurrenCity(
+          latitude,
+          longitude,
+        );
+        setCurrentLocation({
+          lat: latitude,
+          lon: longitude,
+          currentCity,
+        });
+      },
+    );
   }, []);
+
+  useEffect(() => {
+    dispatchWeatherRequest();
+  }, [currentLocation]);
+
+  const handleSearchChange = (search: IOptions | null) => {
+    if (search) {
+      const [lat, lon]: string[] = search.value.split(' ');
+      setCurrentLocation({
+        lat: +lat,
+        lon: +lon,
+        currentCity: search.label,
+      });
+      dispatchWeatherRequest();
+    }
+  };
 
   return (
     <>
-      <SearchBar onSearchChange={handleSearchChange} />
-      <SwitchWeatherAPI />
-      <TimeCity />
-      <Calendar />
-      <Weather />
+      {isCurrentLocationExist
+        && currentLocation.currentCity && (
+          <>
+            <SearchBar
+              onSearchChange={handleSearchChange}
+              currentLocation={currentLocation}
+            />
+            <SwitchWeatherAPI
+              onAPIChange={dispatchWeatherRequest}
+            />
+            <TimeCity
+              defaultCity={currentLocation.currentCity}
+            />
+            <Calendar />
+            <Weather />
+          </>
+      )}
+      {!isCurrentLocationExist && <Loader />}
     </>
   );
 }

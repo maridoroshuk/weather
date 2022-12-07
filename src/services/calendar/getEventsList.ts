@@ -1,5 +1,5 @@
 import ApiCalendar from 'react-google-calendar-api';
-import { IEvent } from '@customTypes/events';
+import { IEvent } from '@customTypes/calendar';
 import { getEndOfDayDate } from '@utils/date';
 
 interface ServerResponse {

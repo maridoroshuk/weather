@@ -1,4 +1,4 @@
-import { IEvent } from '@customTypes/events';
+import { IEvent } from '@customTypes/calendar';
 import { createSlice } from '@reduxjs/toolkit';
 import ApiCalendar from 'react-google-calendar-api';
 

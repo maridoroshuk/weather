@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  APIType,
-  IForecast,
-} from 'src/customTypes/weather';
+import { ForecastType } from 'src/customTypes/weather';
 import { useSelector } from 'react-redux';
+import Loader from '@components/Loader';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
 import { Container } from './styled';
@@ -14,16 +12,19 @@ function Weather() {
       weather: {
         temp: number | null;
         code: number | null;
-        forecast: IForecast[];
+        forecast: ForecastType;
       };
     }) => state.weather,
   );
   return (
     <Container>
-      {temp && code && (
-        <CurrentWeather temp={temp} code={code} />
+      {temp && code && forecast && (
+        <>
+          <CurrentWeather temp={temp} code={code} />
+          <Forecast forecast={forecast} />
+        </>
       )}
-      {forecast && <Forecast forecast={forecast} />}
+      {(!temp || !code || !forecast) && <Loader />}
     </Container>
   );
 }

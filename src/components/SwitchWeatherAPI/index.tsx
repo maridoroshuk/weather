@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Label, RadioInput } from './styled';
 
-function SwitchWeatherAPI() {
+interface ISwitchWeatherAPI {
+  onAPIChange: () => void;
+}
+
+function SwitchWeatherAPI({
+  onAPIChange,
+}: ISwitchWeatherAPI) {
   const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -12,6 +18,7 @@ function SwitchWeatherAPI() {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     dispatch(updateWeatherAPI({ api: e.target.value }));
+    onAPIChange();
     setActiveIndex((prevState) => (prevState === 0 ? 1 : 0));
   };
   return (

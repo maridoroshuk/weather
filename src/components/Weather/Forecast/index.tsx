@@ -1,7 +1,9 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { WEEK_DAYS } from '@constants/weekDays';
-import { IForecast } from 'src/customTypes/weather';
+import { ForecastType } from 'src/customTypes/weather';
+import getWeatherIcon from '@utils/getWeatherIcon';
+import transformForecastList from '@utils/transformForecastList';
 import {
   Container,
   DailyItem,
@@ -11,7 +13,7 @@ import {
 } from './styled';
 
 interface ForecastProps {
-  forecast: IForecast[];
+  forecast: ForecastType;
 }
 
 function Forecast({ forecast }: ForecastProps) {
@@ -21,21 +23,28 @@ function Forecast({ forecast }: ForecastProps) {
     WEEK_DAYS.length,
   ).concat(WEEK_DAYS.slice(0, currentWeekDay));
 
+  const data = transformForecastList(forecast);
+
   return (
     <Container>
-      {forecast.map((item, index) => (
-        <DailyItem key={uuidv4()}>
-          <DayTitle>{forecastDays[index]}</DayTitle>
-          <WeatherIconSmall
-            alt="weather"
-            src={`icons/${item.weather[0].icon}.png`}
-          />
-          <Temperature>
-            {item.main.temp && Math.round(item.main.temp)}
-            °C
-          </Temperature>
-        </DailyItem>
-      ))}
+      {data
+        && data.map((item, index) => (
+          <DailyItem key={uuidv4()}>
+            <DayTitle>{forecastDays[index]}</DayTitle>
+            {item.code && (
+              <WeatherIconSmall
+                alt="weather"
+                src={`icons/${getWeatherIcon(
+                  item.code,
+                )}.png`}
+              />
+            )}
+            <Temperature>
+              {item.temp && Math.round(item.temp)}
+              °C
+            </Temperature>
+          </DailyItem>
+        ))}
     </Container>
   );
 }

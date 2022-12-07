@@ -17,6 +17,7 @@ import {
 } from '@store/features/weatherSlice';
 import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
 import { APIOptions } from '@customTypes/weather';
+import getWeatherBitForecast from '@services/weather/getWeatherBitForecast';
 
 function* openWeatherSagaWorker({
   payload,
@@ -34,7 +35,9 @@ function* openWeatherSagaWorker({
       payload?.search?.lon,
     );
     const forecast = yield call(
-      getOpenWeatherForecast,
+      api === APIOptions.OPENWEATHER
+        ? getOpenWeatherForecast
+        : getWeatherBitForecast,
       payload?.search?.lat,
       payload?.search?.lon,
     );

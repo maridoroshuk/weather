@@ -6,7 +6,7 @@ import {
   setApiCalendar,
   setIsLoggedIn,
 } from '@store/features/calendarSlice';
-import { IEvent } from '@customTypes/events';
+import { IEvent } from '@customTypes/calendar';
 import getApiCalendar from '@utils/getApiCalendar';
 
 import Events from './Events';

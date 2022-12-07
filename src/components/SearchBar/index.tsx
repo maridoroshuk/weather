@@ -1,35 +1,39 @@
 import React, { useState } from 'react';
-import { AsyncPaginate } from 'react-select-async-paginate';
-import { IOptions } from 'src/customTypes/search';
-import { GEO_API_URL } from '@constants/api';
-import getCityStringFromResponse from '@utils/getCityStringFromResponse';
+import AsyncSelect from 'react-select/async';
+import {
+  ICurrentLocation,
+  IOptions,
+} from '@customTypes/weather';
+import filterCities from '@utils/filterCities';
 import { Container } from './styled';
 
 type SearchBarProps = {
-  onSearchChange: (input: IOptions | null) => void;
+  onSearchChange: (input: IOptions) => void;
+  currentLocation: ICurrentLocation;
 };
 
-function SearchBar({ onSearchChange }: SearchBarProps) {
-  const [value, setValue] = useState<IOptions | null>(null);
+function SearchBar({
+  onSearchChange,
+  currentLocation,
+}: SearchBarProps) {
+  const [value, setValue] = useState<IOptions | null>(
+    () => ({
+      value: `${currentLocation.lat} ${currentLocation.lon}`,
+      label: `${currentLocation.currentCity}`,
+    }),
+  );
 
-  const loadOptionsHandler = async (query: string) => {
-    const response = await fetch(
-      `${GEO_API_URL}/city?limit=30&name=${query}`,
-      {
-        method: 'GET',
-        headers: {
-          'X-API-Key': `${process.env.REACT_APP_NINJAS_API_KEY}`,
-        },
-      },
-    );
+  const loadOptionsHandler = (inputValue: string) => {
+    if (inputValue) {
+      return filterCities(inputValue);
+    }
+    if (currentLocation.currentCity) {
+      return filterCities(currentLocation.currentCity);
+    }
+  };
 
-    const data = await response.json();
-    const options = getCityStringFromResponse(data);
-
-    return {
-      options,
-      hasMore: data.length >= 1,
-    };
+  const onFocusHandler = () => {
+    setValue(null);
   };
 
   const onChangeHandler = (input: any) => {
@@ -40,10 +44,12 @@ function SearchBar({ onSearchChange }: SearchBarProps) {
 
   return (
     <Container>
-      <AsyncPaginate
+      <AsyncSelect
         placeholder="Search for city"
-        debounceTimeout={600}
+        cacheOptions
+        defaultOptions
         value={value}
+        onFocus={onFocusHandler}
         onChange={onChangeHandler}
         loadOptions={loadOptionsHandler}
       />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IEvent } from '@customTypes/events';
+import { IEvent } from '@customTypes/calendar';
 import { getTaskTime } from '@utils/date';
 import {
   Container,

@@ -5,7 +5,6 @@ import {
   ForkEffect,
 } from 'redux-saga/effects';
 import watchCalendarSaga from './calendarSaga';
-import watchCitySearchSaga from './citySearchOptionsSaga';
 import watchWeatherSaga from './weatherSaga';
 
 function* rootSaga(): Generator<
@@ -13,7 +12,6 @@ function* rootSaga(): Generator<
   void
   > {
   yield all([
-    fork(watchCitySearchSaga),
     fork(watchWeatherSaga),
     fork(watchCalendarSaga),
   ]);

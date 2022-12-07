@@ -1,4 +1,4 @@
-import { APIOptions, APIType, IForecast } from 'src/customTypes/weather';
+import { APIOptions, APIType, ForecastType } from 'src/customTypes/weather';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface WeatherState {
@@ -11,7 +11,7 @@ export interface WeatherState {
   api: APIType;
   temp: number | null;
   code: number | null;
-  forecast: IForecast[];
+  forecast: ForecastType;
   errorMessage: string | null;
 }
 
