@@ -1,47 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import initializeGapiClient from '@utils/initializeGapiClient';
-import { getEventsRequest, setIsLoggedInd } from '@store/features/calendarSlice';
+import { getEventsRequest, setIsLoggedInd } from '@store/features/calendar/calendarSlice';
 import getTokenClient from '@utils/getTokenClient';
 import { IEvent } from '@customTypes/events';
 import Events from './Events';
 import Login from './Login';
 
-const { gapi } = window;
-
 function Calendar() {
   const dispatch = useDispatch();
-  const tokenClient = getTokenClient();
 
-  const { events, isLoggedIn } = useSelector(
+  const { events, apiCalendar, isLoggedIn } = useSelector(
     (state: {
       calendar: {
         events: IEvent[] | null;
         isLoggedIn: boolean;
+        apiCalendar: ApiCalendar;
       };
     }) => state.calendar,
   );
 
   useEffect(() => {
-    gapi.load('client', initializeGapiClient);
+    dispatch(
+      setApiCalendar({ apiCalendar: getApiCalendar() }),
+    );
   }, []);
 
   const handleAuthClick = () => {
-    const token = gapi.client.getToken();
-
-    tokenClient.callback = async (resp: any) => {
+    apiCalendar.handleAuthClick();
+    apiCalendar.tokenClient.callback = async (resp: any) => {
       if (resp.error !== undefined) {
         throw resp;
       }
       dispatch(setIsLoggedInd());
       dispatch(getEventsRequest());
     };
-
-    if (token === null) {
-      tokenClient.requestAccessToken({ prompt: 'consent' });
-    } else {
-      tokenClient.requestAccessToken({ prompt: '' });
-    }
   };
 
   return (
