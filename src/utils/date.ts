@@ -23,7 +23,9 @@ export const getEndOfDayDate: Date = new Date(
   59,
 );
 
-export const getTaskTime = (date: string): string => new Date(date).toLocaleTimeString([], {
+export const getLocalTime = (date: string): string => new Date(date).toLocaleTimeString([], {
   hour: '2-digit',
   minute: '2-digit',
 });
+
+export const getWeatherDate = (date: string): string => new Date(date).toLocaleDateString();

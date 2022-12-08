@@ -1,6 +1,6 @@
 import React from 'react';
 import { IEvent } from '@customTypes/calendar';
-import { getTaskTime } from '@utils/date';
+import { getLocalTime } from '@utils/date';
 import {
   Container,
   DateContainer,
@@ -19,11 +19,11 @@ function Events({ events }: IEventsProps) {
         <Container key={event.id}>
           <DateContainer>
             <DateString>
-              {getTaskTime(event.start.dateTime)}
+              {getLocalTime(event.start.dateTime)}
             </DateString>
             <DateString> - </DateString>
             <DateString>
-              {getTaskTime(event.end.dateTime)}
+              {getLocalTime(event.end.dateTime)}
             </DateString>
           </DateContainer>
           <Title>{event.summary}</Title>

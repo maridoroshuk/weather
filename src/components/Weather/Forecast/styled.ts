@@ -17,7 +17,7 @@ export const DailyItem = styled.li`
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: ${({ theme: { spaces } }) => `${spaces.xxxs}px`} 0;
+  margin: ${({ theme: { spaces } }) => `${spaces.xxs}px`} 0;
   padding: ${({ theme: { spaces } }) => `${spaces.xxs}px ${spaces.xl}px`}
     0;
 `;

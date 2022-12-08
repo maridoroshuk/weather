@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '@components/SearchBar';
-import { getWeatherRequest } from '@store/features/weatherSlice';
+import { weatherRequest } from '@store/features/weatherSlice';
 import Weather from '@components/Weather';
 import TimeCity from '@components/TimeCity';
 import Calendar from '@components/Calendar';
@@ -38,7 +38,7 @@ function Home() {
   const dispatchWeatherRequest = () => {
     if (isCurrentLocationExist) {
       dispatch(
-        getWeatherRequest({
+        weatherRequest({
           search: {
             lat: currentLocation.lat,
             lon: currentLocation.lon,

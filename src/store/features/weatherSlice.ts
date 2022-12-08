@@ -1,4 +1,9 @@
-import { APIOptions, APIType, ForecastType } from 'src/customTypes/weather';
+import {
+  APIOptions,
+  APIType,
+  IForecastDaily,
+  IForcastHourly,
+} from 'src/customTypes/weather';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface WeatherState {
@@ -9,9 +14,10 @@ export interface WeatherState {
   city: string | null;
   isLoading: boolean;
   api: APIType;
-  temp: number | null;
+  hourly: IForcastHourly[];
+  temp: number | Array<number> | null;
   code: number | null;
-  forecast: ForecastType;
+  forecast: IForecastDaily[] | null;
   errorMessage: string | null;
 }
 
@@ -22,10 +28,11 @@ const initialState: WeatherState = {
   },
   city: null,
   api: APIOptions.OPENWEATHER,
+  hourly: [],
   isLoading: false,
   temp: null,
   code: null,
-  forecast: [],
+  forecast: null,
   errorMessage: null,
 };
 
@@ -33,20 +40,30 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    getWeatherRequest: (state, action) => ({
+    weatherRequest: (state, action) => ({
       ...state,
       isLoading: true,
       search: action.payload.search,
       city: action.payload.city,
     }),
-    getWeatherSuccess: (state, action) => ({
+    weatherDailySuccess: (state, action) => ({
       ...state,
       isLoading: false,
       temp: action.payload.current.temp,
       code: action.payload.current.code,
       forecast: action.payload.forecast,
     }),
-    getWeatherFailure: (state, action) => ({
+    weatherHourlySuccess: (state, action) => ({
+      ...state,
+      isLoading: false,
+      hourly: action.payload.current,
+    }),
+    weatherDailyFailure: (state, action) => ({
+      ...state,
+      isLoading: false,
+      errorMessage: action.payload.message,
+    }),
+    weatherHourlyFailure: (state, action) => ({
       ...state,
       isLoading: false,
       errorMessage: action.payload.message,
@@ -59,9 +76,11 @@ export const weatherSlice = createSlice({
 });
 
 export const {
-  getWeatherRequest,
-  getWeatherSuccess,
-  getWeatherFailure,
+  weatherRequest,
+  weatherDailySuccess,
+  weatherDailyFailure,
+  weatherHourlySuccess,
+  weatherHourlyFailure,
   updateWeatherAPI,
 } = weatherSlice.actions;
 

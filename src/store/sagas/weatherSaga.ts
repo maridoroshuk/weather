@@ -11,49 +11,51 @@ import {
 import getWeatherOpenWeatherAPI from '@services/weather/getWeatherOpenWeatherAPI';
 import getOpenWeatherForecast from '@services/weather/getOpenWeatherForecast';
 import {
-  getWeatherFailure,
-  getWeatherRequest,
-  getWeatherSuccess,
+  weatherDailyFailure,
+  weatherDailySuccess,
+  weatherHourlySuccess,
+  weatherRequest,
 } from '@store/features/weatherSlice';
-import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
 import { APIOptions } from '@customTypes/weather';
-import getWeatherBitForecast from '@services/weather/getWeatherBitForecast';
+import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
 
-function* openWeatherSagaWorker({
+function* weatherSagaWorker({
   payload,
-}: ReturnType<typeof getWeatherRequest>): Generator<
+}: ReturnType<typeof weatherRequest>): Generator<
   CallEffect | PutEffect | SelectEffect,
   void
 > {
   try {
     const api = yield select((state) => state.weather.api);
+    const isDailyRequest = api === APIOptions.OPENWEATHER;
     const current = yield call(
-      api === APIOptions.OPENWEATHER
+      isDailyRequest
         ? getWeatherOpenWeatherAPI
         : getWeatherBitAPI,
       payload?.search?.lat,
       payload?.search?.lon,
     );
     const forecast = yield call(
-      api === APIOptions.OPENWEATHER
-        ? getOpenWeatherForecast
-        : getWeatherBitForecast,
+      getOpenWeatherForecast,
       payload?.search?.lat,
       payload?.search?.lon,
     );
-    yield put(getWeatherSuccess({ current, forecast }));
+
+    if (isDailyRequest) {
+      yield put(weatherDailySuccess({ current, forecast }));
+    } else {
+      console.log(current);
+      yield put(weatherHourlySuccess({ current }));
+    }
   } catch (error: unknown) {
     if (error instanceof Error) {
-      yield put(getWeatherFailure(error.message));
+      yield put(weatherDailyFailure(error.message));
     }
   }
 }
 
 function* watchWeatherSaga(): Generator<ForkEffect> {
-  yield takeLatest(
-    getWeatherRequest.type,
-    openWeatherSagaWorker,
-  );
+  yield takeLatest(weatherRequest.type, weatherSagaWorker);
 }
 
 export default watchWeatherSaga;

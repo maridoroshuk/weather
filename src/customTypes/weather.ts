@@ -1,4 +1,4 @@
-export interface IForecastOpenWeather {
+export interface IForecastDaily {
   main: {
     temp: number | null;
   };
@@ -7,14 +7,13 @@ export interface IForecastOpenWeather {
   }[];
 }
 
-export interface IForecastWeatherBit {
-  temp: number | null;
+export interface IForcastHourly {
+  app_temp: number;
   weather: {
     code: number;
   };
+  timestamp_local: string;
 }
-
-export type ForecastType = IForecastOpenWeather[] | IForecastWeatherBit[]
 
 export enum APIOptions {
   OPENWEATHER = 'OpenWeatherApi',

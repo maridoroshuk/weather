@@ -1,38 +1,17 @@
-import { APIOptions, APIType } from '@customTypes/weather';
-import getWeatherIcon from '@utils/getWeatherIcon';
 import React from 'react';
-import {
-  Label,
-  Container,
-  Temperature,
-  Section,
-  WeatherIcon,
-} from './styled';
+import { Container } from './styled';
+import Daily from './Daily';
+import Hourly from './Hourly';
 
-interface CurrentWeatherProps {
-  temp: number;
-  code: number;
+interface ICurrentWeather {
+  isDaily: boolean;
 }
 
-function CurrentWeather({
-  temp,
-  code,
-}: CurrentWeatherProps) {
+function CurrentWeather({ isDaily }: ICurrentWeather) {
   return (
     <Container>
-      <Section>
-        <Label>Today</Label>
-        <WeatherIcon
-          alt="weather"
-          src={`icons/${getWeatherIcon(code)}.png`}
-        />
-      </Section>
-      <Section>
-        <Temperature>
-          {Math.round(temp)}
-          °C
-        </Temperature>
-      </Section>
+      {isDaily && <Daily />}
+      {!isDaily && <Hourly />}
     </Container>
   );
 }
