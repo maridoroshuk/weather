@@ -2,10 +2,6 @@ import ApiCalendar from 'react-google-calendar-api';
 import { IEvent } from '@customTypes/calendar';
 import { getEndOfDayDate } from '@utils/date';
 
-interface ServerResponse {
-  items: IEvent[];
-}
-
 const request = {
   calendarId: 'primary',
   timeMin: new Date().toISOString(),
@@ -18,7 +14,7 @@ const request = {
 
 const getEventsList = async (
   calendar: ApiCalendar,
-): Promise<ServerResponse> => {
+): Promise<IEvent[]> => {
   const response = await calendar.listEvents(request);
   const { items } = response.result;
   return items;

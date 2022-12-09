@@ -1,14 +1,10 @@
 import { OPEN_WEATHER_API_URL } from '@constants/api';
-
-interface ServerResponse {
-  temperature: number;
-  icon: string;
-}
+import { IForecastDaily } from '@customTypes/weather';
 
 const getOpenWeatherForecast = async (
   lat: number,
   lon: number,
-): Promise<ServerResponse> => {
+): Promise<IForecastDaily[]> => {
   const response = await fetch(
     `${OPEN_WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=metric`,
   );

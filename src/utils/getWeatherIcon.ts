@@ -34,7 +34,7 @@ const getWeatherIcon = (code: number): string => {
   if (code >= 803 && code <= 804) {
     return WEATHER_CODES.BROKEN_CLOUDS;
   }
-  return '';
+  return WEATHER_CODES.UNKNOWN;
 };
 
 export default getWeatherIcon;

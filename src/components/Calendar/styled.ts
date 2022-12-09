@@ -7,6 +7,13 @@ export const Container = styled.div`
 
 export const Title = styled.h3`
   color: ${({ theme: { colors } }) => `${colors.blue}`};
+  font-size: ${({ theme: { fontSizes } }) => `${fontSizes.l}px`};
+`;
+
+export const Text = styled.h3`
+  color: ${({ theme: { colors } }) => `${colors.gray}`};
+  font-weight: 500;
+  letter-spacing: ${({ theme: { spaces } }) => `${spaces.xxs}px`};
 `;
 
 export const Wrapper = styled.div`

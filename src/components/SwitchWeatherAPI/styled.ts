@@ -13,3 +13,4 @@ export const Title = styled.span`
 `;
 export const RadioInput = styled.input``;
 export const Label = styled.label``;
+export const SelectWrapper = styled.div``;

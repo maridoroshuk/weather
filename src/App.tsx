@@ -1,15 +1,17 @@
 import React from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
 import Home from '@components/Home';
 import { ThemeProvider } from 'styled-components';
+import { persistor } from '@store/store';
 import { theme } from './theme';
 
 function App() {
   return (
-    <div>
+    <PersistGate persistor={persistor}>
       <ThemeProvider theme={theme}>
         <Home />
       </ThemeProvider>
-    </div>
+    </PersistGate>
   );
 }
 

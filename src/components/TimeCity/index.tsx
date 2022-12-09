@@ -6,7 +6,7 @@ import Time from './Time';
 import City from './City';
 
 interface ITimeCity {
-  defaultCity: string | null;
+  defaultCity: string | undefined;
 }
 
 function TimeCity({ defaultCity }: ITimeCity) {

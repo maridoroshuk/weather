@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  APIOptions,
-  IForecastDaily,
-  IForcastHourly,
-} from 'src/customTypes/weather';
+import { IForecastDaily } from 'src/customTypes/weather';
 import { useSelector } from 'react-redux';
 import Loader from '@components/Loader';
 import CurrentWeather from './CurrentWeather';
@@ -11,31 +7,25 @@ import Forecast from './Forecast';
 import { Container } from './styled';
 
 function Weather() {
-  const {
-    api, hourly, temp, code, forecast,
-  } = useSelector(
+  const { isLoading, forecast } = useSelector(
     (state: {
       weather: {
-        api: APIOptions;
-        hourly: IForcastHourly[];
-        temp: number | null;
-        code: number | null;
+        isLoading: boolean;
         forecast: IForecastDaily[];
       };
     }) => state.weather,
   );
 
-  const isDaily = api === APIOptions.OPENWEATHER;
-
   return (
-    <Container>
-      {forecast && (
-        <>
-          <CurrentWeather isDaily={isDaily} />
+    <>
+      {!isLoading && (
+        <Container>
+          <CurrentWeather />
           <Forecast forecast={forecast} />
-        </>
+        </Container>
       )}
-    </Container>
+      {isLoading && <Loader />}
+    </>
   );
 }
 

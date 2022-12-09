@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { WEEK_DAYS } from '@constants/weekDays';
 import { IForecastDaily } from 'src/customTypes/weather';
 import getWeatherIcon from '@utils/getWeatherIcon';
+import forecastDays from '@utils/forecastDays';
 import {
   Container,
   DailyItem,
@@ -11,17 +12,11 @@ import {
   WeatherIconSmall,
 } from './styled';
 
-interface ForecastProps {
+interface IForecast {
   forecast: IForecastDaily[];
 }
 
-function Forecast({ forecast }: ForecastProps) {
-  const currentWeekDay = new Date().getDay();
-  const forecastDays = WEEK_DAYS.slice(
-    currentWeekDay,
-    WEEK_DAYS.length,
-  ).concat(WEEK_DAYS.slice(0, currentWeekDay));
-
+function Forecast({ forecast }: IForecast) {
   return (
     <Container>
       {forecast

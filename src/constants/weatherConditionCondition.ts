@@ -10,4 +10,5 @@ export enum WEATHER_CODES {
   FEW_CLOUDS = '02d',
   SCATTERED_CLOUDS = '03d',
   BROKEN_CLOUDS = '04d',
+  UNKNOWN = 'unknown'
 }

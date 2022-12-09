@@ -19,38 +19,45 @@ import {
 import { APIOptions } from '@customTypes/weather';
 import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
 
+function* successSaga(
+  lat: number,
+  lon: number,
+): Generator<CallEffect | PutEffect | SelectEffect, void> {
+  const api = yield select((state) => state.weather.api);
+  const isDailyRequest = api === APIOptions.OPENWEATHER;
+  const current = yield call(
+    isDailyRequest
+      ? getWeatherOpenWeatherAPI
+      : getWeatherBitAPI,
+    lat,
+    lon,
+  );
+  const forecast = yield call(
+    getOpenWeatherForecast,
+    lat,
+    lon,
+  );
+
+  if (isDailyRequest) {
+    yield put(weatherDailySuccess({ current, forecast }));
+  } else {
+    yield put(weatherHourlySuccess({ current }));
+  }
+}
+
+function* errorSaga(error: unknown) {
+  if (error instanceof Error) {
+    yield put(weatherDailyFailure(error.message));
+  }
+}
+
 function* weatherSagaWorker({
   payload,
-}: ReturnType<typeof weatherRequest>): Generator<
-  CallEffect | PutEffect | SelectEffect,
-  void
-> {
+}: ReturnType<typeof weatherRequest>) {
   try {
-    const api = yield select((state) => state.weather.api);
-    const isDailyRequest = api === APIOptions.OPENWEATHER;
-    const current = yield call(
-      isDailyRequest
-        ? getWeatherOpenWeatherAPI
-        : getWeatherBitAPI,
-      payload?.search?.lat,
-      payload?.search?.lon,
-    );
-    const forecast = yield call(
-      getOpenWeatherForecast,
-      payload?.search?.lat,
-      payload?.search?.lon,
-    );
-
-    if (isDailyRequest) {
-      yield put(weatherDailySuccess({ current, forecast }));
-    } else {
-      console.log(current);
-      yield put(weatherHourlySuccess({ current }));
-    }
+    yield successSaga(payload?.search?.lat, payload?.search?.lon);
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      yield put(weatherDailyFailure(error.message));
-    }
+    yield errorSaga(error);
   }
 }
 

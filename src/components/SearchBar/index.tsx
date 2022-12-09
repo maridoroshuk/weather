@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import {
   ICurrentLocation,
@@ -7,27 +7,32 @@ import {
 import filterCities from '@utils/filterCities';
 import { Container } from './styled';
 
-type SearchBarProps = {
+interface ISearchBar {
   onSearchChange: (input: IOptions) => void;
-  currentLocation: ICurrentLocation;
-};
+  currentLocation: ICurrentLocation | null;
+}
 
 function SearchBar({
   onSearchChange,
   currentLocation,
-}: SearchBarProps) {
-  const [value, setValue] = useState<IOptions | null>(
-    () => ({
-      value: `${currentLocation.lat} ${currentLocation.lon}`,
-      label: `${currentLocation.currentCity}`,
-    }),
-  );
+}: ISearchBar) {
+  const [value, setValue] = useState<IOptions | null>(null);
+
+  useEffect(() => {
+    if (currentLocation) {
+      setValue({
+        value: `${currentLocation.lat} ${currentLocation.lon}`,
+        label: `${currentLocation.currentCity}`,
+      });
+    }
+    setValue(null);
+  }, [currentLocation]);
 
   const loadOptionsHandler = (inputValue: string) => {
     if (inputValue) {
       return filterCities(inputValue);
     }
-    if (currentLocation.currentCity) {
+    if (currentLocation?.currentCity) {
       return filterCities(currentLocation.currentCity);
     }
   };

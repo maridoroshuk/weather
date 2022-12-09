@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import getWeatherIcon from '@utils/getWeatherIcon';
-import { useSelector } from 'react-redux';
 import { IForcastHourly } from '@customTypes/weather';
 import Loader from '@components/Loader';
-import { getWeatherDate, getLocalTime } from '@utils/date';
+import { getLocalTime } from '@utils/date';
+import getTodayHourlyForecast from '@utils/getTodayHourlyForecast';
 import {
   Label,
   Section,
@@ -12,48 +13,32 @@ import {
   Time,
 } from './styled';
 
-function Hourly() {
-  const { hourly } = useSelector(
-    (state: {
-      weather: {
-        hourly: IForcastHourly[] | null;
-      };
-    }) => state.weather,
-  );
+interface IHourly {
+  hourlyList: IForcastHourly[];
+}
 
-  const [todayWeatherList, setTodayWeatherList] = useState<
-    IForcastHourly[] | undefined
-  >(undefined);
-
-  useEffect(() => {
-    setTodayWeatherList(
-      hourly?.filter(
-        (el) => getWeatherDate(el.timestamp_local)
-          === new Date().toLocaleDateString(),
-      ),
-    );
-  }, [hourly]);
+function Hourly({ hourlyList }: IHourly) {
+  const data = getTodayHourlyForecast(hourlyList);
 
   return (
     <>
       <Label>Today</Label>
-      {todayWeatherList
-        && todayWeatherList.map((el) => (
-          <Section>
-            <Time>{getLocalTime(el.timestamp_local)}</Time>
-            <WeatherIcon
-              alt="weather"
-              src={`icons/${getWeatherIcon(
-                el.weather.code,
-              )}.png`}
-            />
-            <Temperature>
-              {Math.round(el.app_temp)}
-              °C
-            </Temperature>
-          </Section>
-        ))}
-      {!hourly && <Loader />}
+      {data.map((el) => (
+        <Section key={uuidv4()}>
+          <Time>{getLocalTime(el.timestamp_local)}</Time>
+          <WeatherIcon
+            alt="weather"
+            src={`icons/${getWeatherIcon(
+              el.weather.code,
+            )}.png`}
+          />
+          <Temperature>
+            {Math.round(el.app_temp)}
+            °C
+          </Temperature>
+        </Section>
+      ))}
+      {!hourlyList && <Loader />}
     </>
   );
 }

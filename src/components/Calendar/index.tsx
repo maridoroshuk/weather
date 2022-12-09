@@ -9,7 +9,9 @@ import {
 import { IEvent } from '@customTypes/calendar';
 import getApiCalendar from '@utils/getApiCalendar';
 import Events from './Events';
-import { Container, Title, Wrapper } from './styled';
+import {
+  Container, Text, Title, Wrapper,
+} from './styled';
 import Button from './Button';
 
 function Calendar() {
@@ -51,10 +53,11 @@ function Calendar() {
 
   return (
     <Container>
-      {isLoggedIn && events && (
+      {isLoggedIn && (
         <Wrapper>
           <Title>Google Calender Events:</Title>
-          <Events events={events} />
+          {events && <Events events={events} />}
+          {!events && <Text>You have no events for today ✅</Text>}
           <Button
             onClick={handleLogoutClick}
             text="Logout"
@@ -63,11 +66,10 @@ function Calendar() {
       )}
       {!isLoggedIn && (
         <Wrapper>
-          <Title>Login with google to see your events</Title>
-          <Button
-            onClick={handleAuthClick}
-            text="Login"
-          />
+          <Title>
+            Login with google to see your events
+          </Title>
+          <Button onClick={handleAuthClick} text="Login" />
         </Wrapper>
       )}
     </Container>

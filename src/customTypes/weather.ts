@@ -30,7 +30,7 @@ export interface IOptions {
 }
 
 export interface ICurrentLocation {
-  lat: number | null;
-  lon: number | null;
-  currentCity: string | null;
+  lat: number;
+  lon: number;
+  currentCity: string;
 }

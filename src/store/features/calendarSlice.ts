@@ -39,10 +39,12 @@ export const calendarSlice = createSlice({
 
     setApiCalendar: (state, action) => ({
       ...state,
+      isLoading: false,
       apiCalendar: action.payload.apiCalendar,
     }),
     setIsLoggedIn: (state, action) => ({
       ...state,
+      isLoading: false,
       isLoggedIn: action.payload.isLoggedIn,
     }),
   },

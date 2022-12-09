@@ -1,5 +1,16 @@
 import { GEO_API_URL } from '@constants/api';
-import getCityStringFromResponse from './getCityStringFromResponse';
+
+interface ICity {
+  latitude: number;
+  longitude: number;
+  name: string;
+  country: string;
+}
+
+const getCityStringFromResponse = (list: ICity[]) => list.map((city) => ({
+  value: `${city.latitude} ${city.longitude}`,
+  label: `${city.name}, ${city.country}`,
+}));
 
 const filterCities = async (query: string) => {
   const response = await fetch(

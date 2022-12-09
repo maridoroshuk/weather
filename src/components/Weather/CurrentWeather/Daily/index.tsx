@@ -1,6 +1,5 @@
 import React from 'react';
 import getWeatherIcon from '@utils/getWeatherIcon';
-import { useSelector } from 'react-redux';
 import {
   Label,
   Section,
@@ -8,16 +7,12 @@ import {
   WeatherIcon,
 } from './styled';
 
-function Daily() {
-  const { temp, code } = useSelector(
-    (state: {
-      weather: {
-        temp: number;
-        code: number;
-      };
-    }) => state.weather,
-  );
+interface IDaily {
+  temp: number;
+  code: number;
+}
 
+function Daily({ temp, code }: IDaily) {
   return (
     <>
       <Section>

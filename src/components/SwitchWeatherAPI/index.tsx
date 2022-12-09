@@ -7,6 +7,7 @@ import {
   Label,
   RadioInput,
   Title,
+  SelectWrapper,
 } from './styled';
 
 interface ISwitchWeatherAPI {
@@ -29,7 +30,7 @@ function SwitchWeatherAPI({
   return (
     <Container>
       <Title>Weather service:</Title>
-      <div>
+      <SelectWrapper>
         <RadioInput
           type="radio"
           id="openWeather"
@@ -45,8 +46,8 @@ function SwitchWeatherAPI({
           onChange={handleAPIChange}
           checked={activeIndex === 1}
         />
-        <Label htmlFor="weatherBit">WeatherBit</Label>
-      </div>
+        <Label htmlFor="weatherBit">WeatherBit (hourly)</Label>
+      </SelectWrapper>
     </Container>
   );
 }

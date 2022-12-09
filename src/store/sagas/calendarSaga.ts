@@ -15,21 +15,28 @@ import {
   getEventsSuccess,
 } from '@store/features/calendarSlice';
 
-function* calendarSagaWorker(): Generator<
+function* successSaga(): Generator<
   CallEffect | PutEffect | SelectEffect,
   void,
   any
   > {
+  const calendar = yield select(
+    (state) => state.calendar.apiCalendar,
+  );
+  const events = yield call(getEventsList, calendar);
+  yield put(getEventsSuccess({ events }));
+}
+
+function* errorSaga(error: unknown) {
+  if (error instanceof Error) {
+    yield put(getEventsFailure(error.message));
+  }
+}
+function* calendarSagaWorker() {
   try {
-    const calendar = yield select(
-      (state) => state.calendar.apiCalendar,
-    );
-    const events = yield call(getEventsList, calendar);
-    yield put(getEventsSuccess({ events }));
+    yield successSaga();
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      yield put(getEventsFailure(error.message));
-    }
+    yield errorSaga(error);
   }
 }
 
