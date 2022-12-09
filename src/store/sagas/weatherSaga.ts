@@ -8,8 +8,6 @@ import {
   select,
   SelectEffect,
 } from '@redux-saga/core/effects';
-import getWeatherOpenWeatherAPI from '@services/weather/getWeatherOpenWeatherAPI';
-import getOpenWeatherForecast from '@services/weather/getOpenWeatherForecast';
 import {
   weatherDailyFailure,
   weatherDailySuccess,
@@ -17,7 +15,9 @@ import {
   weatherRequest,
 } from '@store/features/weatherSlice';
 import { APIOptions } from '@customTypes/weather';
-import getWeatherBitAPI from '@services/weather/getWeatherBitAPI';
+import getWeatherOpenWeatherAPI from '@store/api/weather/getWeatherOpenWeatherAPI';
+import getWeatherBitAPI from '@store/api/weather/getWeatherBitAPI';
+import getOpenWeatherForecast from '@store/api/weather/getOpenWeatherForecast';
 
 function* successSaga(
   lat: number,

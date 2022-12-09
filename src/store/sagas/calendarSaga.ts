@@ -8,7 +8,7 @@ import {
   ForkEffect,
   SelectEffect,
 } from '@redux-saga/core/effects';
-import getEventsList from '@services/calendar/getEventsList';
+import getEventsList from '@store/api/calendar/getEventsList';
 import {
   getEventsFailure,
   getEventsRequest,

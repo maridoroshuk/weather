@@ -1,4 +1,4 @@
-import { WEATHER_CODES } from '@constants/weatherConditionCondition';
+import { WEATHER_CODES } from '@constants/weatherConditions';
 
 const getWeatherIcon = (code: number): string => {
   if (code > 200 && code < 300) {
