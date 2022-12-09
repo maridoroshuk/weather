@@ -25,7 +25,6 @@ function SearchBar({
         label: `${currentLocation.currentCity}`,
       });
     }
-    setValue(null);
   }, [currentLocation]);
 
   const loadOptionsHandler = (inputValue: string) => {

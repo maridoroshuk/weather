@@ -28,11 +28,7 @@ const persistedReducer = persistReducer(
 );
 
 const store = configureStore({
-  reducer: {
-    weather,
-    calendar,
-    persistedReducer,
-  },
+  reducer: persistedReducer,
   middleware: [sagaMiddleware],
 });
 

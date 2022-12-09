@@ -15,9 +15,9 @@ export interface WeatherState {
   isLoading: boolean;
   api: APIType;
   hourly: IForcastHourly[];
-  temp: number | Array<number> | null;
+  temp: number | null;
   code: number | null;
-  forecast: IForecastDaily[] | null;
+  forecast: IForecastDaily[];
   errorMessage: string | null;
 }
 
@@ -32,7 +32,7 @@ const initialState: WeatherState = {
   isLoading: false,
   temp: null,
   code: null,
-  forecast: null,
+  forecast: [],
   errorMessage: null,
 };
 
