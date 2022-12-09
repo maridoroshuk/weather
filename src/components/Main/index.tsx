@@ -5,7 +5,6 @@ import Weather from '@components/Weather';
 import TimeCity from '@components/TimeCity';
 import Calendar from '@components/Calendar';
 import getWeatherIcon from '@utils/getWeatherIcon';
-import Loader from '@components/Loader';
 import { Wrapper } from './styled';
 
 interface IMain {
@@ -25,22 +24,17 @@ function Main({ currentLocation }: IMain) {
     : '';
 
   return (
-    <>
-      {currentLocation && (
-        <Wrapper
-          style={{
-            backgroundImage,
-          }}
-        >
-          <TimeCity
-            defaultCity={currentLocation.currentCity}
-          />
-          <Calendar />
-          <Weather />
-        </Wrapper>
-      )}
-      {!currentLocation && <Loader />}
-    </>
+    <Wrapper
+      style={{
+        backgroundImage,
+      }}
+    >
+      <TimeCity
+        defaultCity={currentLocation?.currentCity}
+      />
+      <Calendar />
+      {currentLocation && <Weather />}
+    </Wrapper>
   );
 }
 
