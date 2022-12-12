@@ -1,7 +1,7 @@
-import { APIOptions } from '@customTypes/weather';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { APIOptions, APIType } from '@customTypes/weather';
 import { updateWeatherAPI } from '@store/features/weatherSlice';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   Container,
   Label,
@@ -18,14 +18,18 @@ function SwitchWeatherAPI({
   onAPIChange,
 }: ISwitchWeatherAPI) {
   const dispatch = useDispatch();
-  const [activeIndex, setActiveIndex] = useState(0);
-
+  const { api } = useSelector(
+    (state: {
+      weather: {
+        api: APIType;
+      };
+    }) => state.weather,
+  );
   const handleAPIChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     dispatch(updateWeatherAPI({ api: e.target.value }));
     onAPIChange();
-    setActiveIndex((prevState) => (prevState === 0 ? 1 : 0));
   };
   return (
     <Container>
@@ -36,7 +40,7 @@ function SwitchWeatherAPI({
           id="openWeather"
           value={APIOptions.OPENWEATHER}
           onChange={handleAPIChange}
-          checked={activeIndex === 0}
+          checked={api === APIOptions.OPENWEATHER}
         />
         <Label htmlFor="openWeather">OpenWeather</Label>
         <RadioInput
@@ -44,9 +48,11 @@ function SwitchWeatherAPI({
           id="weatherBit"
           value={APIOptions.WEATHERBIT}
           onChange={handleAPIChange}
-          checked={activeIndex === 1}
+          checked={api === APIOptions.WEATHERBIT}
         />
-        <Label htmlFor="weatherBit">WeatherBit (hourly)</Label>
+        <Label htmlFor="weatherBit">
+          WeatherBit (hourly)
+        </Label>
       </SelectWrapper>
     </Container>
   );
