@@ -57,7 +57,8 @@
     "assert": false,
     "expect": false,
     "NodeJS": true,
-    "google": true
+    "google": true,
+    "JSX": true
   },
 
   "parser": "@typescript-eslint/parser",
