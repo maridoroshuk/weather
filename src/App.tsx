@@ -4,14 +4,17 @@ import Home from '@components/Home';
 import { ThemeProvider } from 'styled-components';
 import { persistor } from '@store/store';
 import { theme } from './theme';
+import ErrorBoundary from './ErrorBoundary';
 
 function App() {
   return (
-    <PersistGate persistor={persistor}>
-      <ThemeProvider theme={theme}>
-        <Home />
-      </ThemeProvider>
-    </PersistGate>
+    <ErrorBoundary>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <Home />
+        </ThemeProvider>
+      </PersistGate>
+    </ErrorBoundary>
   );
 }
 
