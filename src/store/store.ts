@@ -13,6 +13,7 @@ import rootSaga from '@store/sagas/rootSaga';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['weather'],
 };
 
 const sagaMiddleware = createSagaMiddleware();
