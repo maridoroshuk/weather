@@ -3,7 +3,7 @@ import {
   APIType,
   IForecastDaily,
   IForcastHourly,
-} from 'src/customTypes/weather';
+} from '@customTypes/weather';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface WeatherState {
