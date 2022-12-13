@@ -2,7 +2,7 @@ import ApiCalendar from 'react-google-calendar-api';
 import { IEvent } from '@customTypes/calendar';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CalendarState {
+export interface CalendarState {
   events: IEvent[] | null;
   isLoading: boolean;
   isLoggedIn: boolean;
