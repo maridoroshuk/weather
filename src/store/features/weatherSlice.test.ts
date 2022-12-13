@@ -141,7 +141,7 @@ it('should handle a new hourly weather data  being added', () => {
 
 const message = 'No data available';
 
-it('should handle weather daily and weather hourly errors', () => {
+it('should handle weather daily and weather hourly errors being added', () => {
   const data = {
     message,
   };
