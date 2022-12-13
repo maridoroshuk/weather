@@ -1,6 +1,6 @@
+import ApiCalendar from 'react-google-calendar-api';
 import { IEvent } from '@customTypes/calendar';
 import { createSlice } from '@reduxjs/toolkit';
-import ApiCalendar from 'react-google-calendar-api';
 
 interface CalendarState {
   events: IEvent[] | null;

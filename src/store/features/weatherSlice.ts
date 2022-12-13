@@ -1,10 +1,10 @@
+import { createSlice } from '@reduxjs/toolkit';
 import {
   APIOptions,
   APIType,
   IForecastDaily,
   IForcastHourly,
 } from '@customTypes/weather';
-import { createSlice } from '@reduxjs/toolkit';
 
 export interface WeatherState {
   search: {
