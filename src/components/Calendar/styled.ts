@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FONT_WEIGHT } from '@constants/sizes';
 
 export const Container = styled.div`
   margin: ${({ theme: { spaces } }) => `${spaces.l}px`};
@@ -13,7 +12,7 @@ export const Title = styled.h3`
 
 export const Text = styled.h3`
   color: ${({ theme: { colors } }) => `${colors.gray}`};
-  font-weight: ${FONT_WEIGHT[500]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[500]}px`};
   letter-spacing: ${({ theme: { spaces } }) => `${spaces.xxs}px`};
 `;
 

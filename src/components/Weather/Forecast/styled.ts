@@ -1,9 +1,4 @@
 import styled from 'styled-components';
-import {
-  HEIGHT,
-  WIDTH,
-  FONT_WEIGHT,
-} from '@constants/sizes';
 
 export const Container = styled.ul`
   width: 80%;
@@ -18,7 +13,7 @@ export const DailyItem = styled.li`
   background-color: ${({ theme: { colors } }) => `${colors.whitesmoke}`};
   border-radius: ${({ theme: { spaces } }) => `${spaces.xl}px`};
   flex-grow: 1;
-  heigth: ${HEIGHT[40]};
+  heigth: ${({ theme: { height } }) => `${height[40]}px`};
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -29,7 +24,7 @@ export const DailyItem = styled.li`
 
 export const WeatherIconSmall = styled.img`
   display: block;
-  width: ${WIDTH[100]};
+  width: ${({ theme: { width } }) => `${width[100]}px`};
   background-color: ${({ theme: { colors } }) => `${colors.blue}`};
   border-radius: ${({ theme: { spaces } }) => `${spaces.l}px`};
   align-self: center;
@@ -38,11 +33,11 @@ export const DayTitle = styled.label`
   margin-top: ${({ theme: { spaces } }) => `${spaces.xl}px`};
   color: ${({ theme: { colors } }) => `${colors.chromeBlack}`};
   flex: 1 1;
-  font-weight: ${FONT_WEIGHT[600]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[600]}px`};
 `;
 
 export const Temperature = styled.p`
-  font-weight: ${FONT_WEIGHT[600]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[600]}px`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   flex: 1 1;
   width: auto;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { WIDTH, FONT_WEIGHT } from '@constants/sizes';
 
 export const Container = styled.div`
   background-color: ${({ theme: { colors } }) => `${colors.whitesmoke}`};
@@ -18,12 +17,12 @@ export const Title = styled.p`
 `;
 
 export const DateString = styled.p`
-  font-weight: ${FONT_WEIGHT[700]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[700]}px`};
 `;
 
 export const DateContainer = styled.div`
   width: 20%;
-  min-width: ${WIDTH[100]};
+  min-width: ${({ theme: { width } }) => `${width[100]}px`};
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme: { spaces } }) => `${spaces.xs}px`};

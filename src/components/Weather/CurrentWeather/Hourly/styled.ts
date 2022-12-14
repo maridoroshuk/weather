@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { WIDTH, FONT_WEIGHT } from '@constants/sizes';
 
 export const Section = styled.div`
   text-align: center;
@@ -10,7 +9,7 @@ export const Section = styled.div`
 `;
 
 export const City = styled.p`
-  font-weight: ${FONT_WEIGHT[600]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[600]}px`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.m}px`};
   line-heigth: 1;
   margin: 0;
@@ -18,7 +17,7 @@ export const City = styled.p`
 `;
 
 export const Label = styled.h4`
-  font-weight: ${FONT_WEIGHT[600]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[600]}px`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   line-heigth: 1;
   margin: 0;
@@ -27,11 +26,11 @@ export const Label = styled.h4`
 `;
 
 export const WeatherIcon = styled.img`
-  width: ${WIDTH[40]};
+  width: ${({ theme: { width } }) => `${width[40]}px`};
 `;
 
 export const Temperature = styled.p`
-  font-weight: ${FONT_WEIGHT[600]};
+  font-weight: ${({ theme: { fontWeight } }) => `${fontWeight[600]}px`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.l}px`};
   width: auto;
   letter-spacing: ${({ theme: { spaces } }) => `-${spaces.xxs}px`};
