@@ -35,22 +35,16 @@ function TimeCity({ defaultCity }: ITimeCity) {
   const time = getTime(date);
   const day = getDate(date);
 
-  const renderTime = () => {
-    if (time && day) {
-      return <Time time={time} day={day} />;
-    }
-  };
-
-  const renderCity = () => {
-    if (city) {
-      return <City city={defaultCity || city} />;
-    }
-  };
-
   return (
     <Container>
-      <Section>{renderTime()}</Section>
-      <Section>{renderCity()}</Section>
+      <Section>
+        {time && day ? (
+          <Time time={time} day={day} />
+        ) : null}
+      </Section>
+      <Section>
+        {city ? <City city={defaultCity || city} /> : null}
+      </Section>
     </Container>
   );
 }

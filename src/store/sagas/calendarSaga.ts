@@ -32,7 +32,8 @@ function* errorSaga(error: unknown) {
     yield put(getEventsFailure(error.message));
   }
 }
-function* calendarSagaWorker() {
+
+export function* calendarSagaWorker() {
   try {
     yield successSaga();
   } catch (error: unknown) {

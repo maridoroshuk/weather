@@ -21,12 +21,6 @@ function Main({ currentLocation }: IMain) {
 
   const backgroundImage = getBackgroundImage(icon);
 
-  const renderWeather = () => {
-    if (currentLocation) {
-      return <Weather />;
-    }
-  };
-
   return (
     <Wrapper
       style={{
@@ -37,7 +31,7 @@ function Main({ currentLocation }: IMain) {
         defaultCity={currentLocation?.currentCity}
       />
       <Calendar />
-      {renderWeather()}
+      {currentLocation && <Weather />}
     </Wrapper>
   );
 }

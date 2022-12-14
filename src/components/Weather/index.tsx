@@ -16,19 +16,14 @@ function Weather() {
     }) => state.weather,
   );
 
-  const renderDataOrLoader = () => {
-    if (isLoading) {
-      return <Loader />;
-    }
-    return (
-      <Container>
-        <CurrentWeather />
-        <Forecast forecast={forecast} />
-      </Container>
-    );
-  };
-
-  return <>{renderDataOrLoader()}</>;
+  return !isLoading ? (
+    <Container>
+      <CurrentWeather />
+      <Forecast forecast={forecast} />
+    </Container>
+  ) : (
+    <Loader />
+  );
 }
 
 export default Weather;
