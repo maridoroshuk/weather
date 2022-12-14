@@ -2,7 +2,7 @@ import { OPEN_WEATHER_API_URL } from '@constants/api';
 
 interface ServerResponse {
   temp: number;
-  code: number;
+  icon: string;
 }
 
 const getWeatherOpenWeatherAPI = async (
@@ -14,8 +14,8 @@ const getWeatherOpenWeatherAPI = async (
   );
   const data = await response.json();
   const { temp } = data.main;
-  const { id } = data.weather[0];
-  return { temp, code: id };
+  const { icon } = data.weather[0];
+  return { temp, icon };
 };
 
 export default getWeatherOpenWeatherAPI;

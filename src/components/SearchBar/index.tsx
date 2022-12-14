@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import {
+  ICurrentLocation,
   IOptions,
 } from '@customTypes/weather';
 import filterCities from '@utils/filterCities';
-import useCurrentLocation from '@hooks/useCurrentLocation';
-import useDispatchWeatherRequest from '@hooks/useDispatchWeatherRequest';
 import { Container } from './styled';
 
-function SearchBar() {
+interface ISearchBar {
+  onSearchChange: (input: IOptions) => void;
+  currentLocation: ICurrentLocation | null;
+}
+function SearchBar({ onSearchChange, currentLocation }: ISearchBar) {
   const [value, setValue] = useState<IOptions | null>(null);
-
-  const { currentLocation, setCurrentLocation } = useCurrentLocation();
-  const dispatchWeatherRequest = useDispatchWeatherRequest(currentLocation);
 
   useEffect(() => {
     if (currentLocation) {
@@ -36,21 +36,9 @@ function SearchBar() {
     setValue(null);
   };
 
-  const handleSearchChange = (search: IOptions | null) => {
-    if (search) {
-      const [lat, lon]: string[] = search.value.split(' ');
-      setCurrentLocation({
-        lat: +lat,
-        lon: +lon,
-        currentCity: search.label,
-      });
-      dispatchWeatherRequest();
-    }
-  };
-
   const onChangeHandler = (input: any) => {
     setValue(input);
-    handleSearchChange(input);
+    onSearchChange(input);
     setValue(null);
   };
 

@@ -33,7 +33,9 @@
     "no-unused-vars": "off",
     "no-shadow": "off",
     "camelcase": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "import/no-dynamic-require": "off",
+    "global-require": "off"
   },
   "settings": {
     "import/resolver": {

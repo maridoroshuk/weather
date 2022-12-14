@@ -10,13 +10,13 @@ import Hourly from './Hourly';
 
 function CurrentWeather() {
   const {
-    api, temp, code, hourly,
+    api, temp, icon, hourly,
   } = useSelector(
     (state: {
       weather: {
         api: APIOptions;
         temp: number;
-        code: number;
+        icon: string;
         hourly: IForcastHourly[];
       };
     }) => state.weather,
@@ -26,7 +26,7 @@ function CurrentWeather() {
 
   const renderDailyOrHoulyWeather = () => {
     if (isDaily) {
-      return <Daily temp={temp} code={code} />;
+      return <Daily temp={temp} icon={icon} />;
     }
     return <Hourly hourlyList={hourly} />;
   };

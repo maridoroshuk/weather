@@ -1,17 +1,23 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { APIType } from '@customTypes/weather';
+import {
+  APIType,
+  ICurrentLocation,
+} from '@customTypes/weather';
 import { updateWeatherAPI } from '@store/features/weatherSlice';
 import useDispatchWeatherRequest from '@hooks/useDispatchWeatherRequest';
-import useCurrentLocation from '@hooks/useCurrentLocation';
 import { selectButtons } from '@constants/selectButtons';
-import { Container, Title, SelectWrapper } from './styled';
 import SelectButton from './SelectButton';
+import { Container, Title, SelectWrapper } from './styled';
 
-function SwitchWeatherAPI() {
+interface ISwitchWeatherAPI {
+  currentLocation: ICurrentLocation | null;
+}
+function SwitchWeatherAPI({
+  currentLocation,
+}: ISwitchWeatherAPI) {
   const dispatch = useDispatch();
-  const { currentLocation } = useCurrentLocation();
   const dispatchWeatherRequest = useDispatchWeatherRequest(currentLocation);
 
   const { api } = useSelector(

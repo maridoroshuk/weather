@@ -30,6 +30,8 @@ export const DailyItem = styled.li`
 export const WeatherIconSmall = styled.img`
   display: block;
   width: ${WIDTH[100]};
+  background-color: ${({ theme: { colors } }) => `${colors.blue}`};
+  border-radius: ${({ theme: { spaces } }) => `${spaces.l}px`};
   align-self: center;
 `;
 export const DayTitle = styled.label`

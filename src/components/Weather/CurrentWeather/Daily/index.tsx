@@ -1,5 +1,4 @@
 import React from 'react';
-import getWeatherIcon from '@utils/getWeatherIcon';
 import {
   Label,
   Section,
@@ -9,17 +8,18 @@ import {
 
 interface IDaily {
   temp: number;
-  code: number;
+  icon: string;
 }
 
-function Daily({ temp, code }: IDaily) {
+function Daily({ temp, icon }: IDaily) {
+  const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   return (
     <>
       <Section>
         <Label>Today</Label>
         <WeatherIcon
           alt="weather"
-          src={`icons/${getWeatherIcon(code)}.png`}
+          src={iconUrl}
         />
       </Section>
       <Section>

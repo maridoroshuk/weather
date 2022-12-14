@@ -3,14 +3,14 @@ export interface IForecastDaily {
     temp: number | null;
   };
   weather: {
-    id: number;
+    icon: string;
   }[];
 }
 
 export interface IForcastHourly {
   app_temp: number;
   weather: {
-    code: number;
+    icon: string;
   };
   timestamp_local: string;
 }

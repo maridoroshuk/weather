@@ -16,7 +16,7 @@ export interface WeatherState {
   api: APIType;
   hourly: IForcastHourly[];
   temp: number | null;
-  code: number | null;
+  icon: string | null;
   forecast: IForecastDaily[];
   errorMessage: string | null;
 }
@@ -31,7 +31,7 @@ const initialState: WeatherState = {
   hourly: [],
   isLoading: false,
   temp: null,
-  code: null,
+  icon: null,
   forecast: [],
   errorMessage: null,
 };
@@ -50,7 +50,7 @@ export const weatherSlice = createSlice({
       ...state,
       isLoading: false,
       temp: action.payload.current.temp,
-      code: action.payload.current.code,
+      icon: action.payload.current.icon,
       forecast: action.payload.forecast,
     }),
     weatherHourlySuccess: (state, action) => ({

@@ -1,6 +1,5 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import getWeatherIcon from '@utils/getWeatherIcon';
 import { IForcastHourly } from '@customTypes/weather';
 import Loader from '@components/Loader';
 import { getLocalTime } from '@utils/date';
@@ -32,9 +31,7 @@ function Hourly({ hourlyList }: IHourly) {
           <Time>{getLocalTime(el.timestamp_local)}</Time>
           <WeatherIcon
             alt="weather"
-            src={`icons/${getWeatherIcon(
-              el.weather.code,
-            )}.png`}
+            src={`https://www.weatherbit.io/static/img/icons/${el.weather.icon}.png`}
           />
           <Temperature>
             {Math.round(el.app_temp)}

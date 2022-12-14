@@ -10,7 +10,7 @@ export const Section = styled.div`
 `;
 
 export const City = styled.p`
-  font-weight: FONT_WEIGHT[600];
+  font-weight: ${FONT_WEIGHT[600]};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.m}px`};
   line-heigth: 1;
   margin: 0;
@@ -18,7 +18,7 @@ export const City = styled.p`
 `;
 
 export const Label = styled.h4`
-  font-weight: FONT_WEIGHT[600];
+  font-weight: ${FONT_WEIGHT[600]};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   line-heigth: 1;
   margin: 0;
@@ -31,7 +31,7 @@ export const WeatherIcon = styled.img`
 `;
 
 export const Temperature = styled.p`
-  font-weight: FONT_WEIGHT[600];
+  font-weight: ${FONT_WEIGHT[600]};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.l}px`};
   width: auto;
   letter-spacing: ${({ theme: { spaces } }) => `-${spaces.xxs}px`};

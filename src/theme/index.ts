@@ -5,6 +5,7 @@ export const theme = {
     chromeBlack: '##212121',
     transparent: 'transparent',
     blue: '#118ab2',
+    whiteBlue: '#9fd0e0',
     whitesmoke: '#f5f5f5',
     gray: '#808080',
   },
