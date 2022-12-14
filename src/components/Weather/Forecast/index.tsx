@@ -1,6 +1,5 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { WEEK_DAYS } from '@constants/weekDays';
 import { IForecastDaily } from 'src/customTypes/weather';
 import getWeatherIcon from '@utils/getWeatherIcon';
 import forecastDays from '@utils/forecastDays';

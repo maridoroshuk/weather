@@ -1,16 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ICurrentLocation } from '@customTypes/weather';
 import Weather from '@components/Weather';
 import TimeCity from '@components/TimeCity';
 import Calendar from '@components/Calendar';
 import getWeatherIcon from '@utils/getWeatherIcon';
+import useCurrentLocation from '@hooks/useCurrentLocation';
 import { Wrapper } from './styled';
 
-interface IMain {
-  currentLocation: ICurrentLocation | null;
-}
-function Main({ currentLocation }: IMain) {
+function Main() {
+  const { currentLocation } = useCurrentLocation();
+
   const { code } = useSelector(
     (state: {
       weather: {
@@ -23,6 +22,12 @@ function Main({ currentLocation }: IMain) {
     ? `url('./background/${getWeatherIcon(code)}.jpg')`
     : '';
 
+  const renderWeather = () => {
+    if (currentLocation) {
+      return <Weather />;
+    }
+  };
+
   return (
     <Wrapper
       style={{
@@ -33,7 +38,7 @@ function Main({ currentLocation }: IMain) {
         defaultCity={currentLocation?.currentCity}
       />
       <Calendar />
-      {currentLocation && <Weather />}
+      {renderWeather()}
     </Wrapper>
   );
 }

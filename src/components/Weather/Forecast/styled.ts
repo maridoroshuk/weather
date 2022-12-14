@@ -1,10 +1,15 @@
-import { HEIGHT, WIDTH } from '@constants/sizes';
 import styled from 'styled-components';
+import {
+  HEIGHT,
+  WIDTH,
+  FONT_WEIGHT,
+} from '@constants/sizes';
 
 export const Container = styled.ul`
   width: 80%;
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   gap: ${({ theme: { spaces } }) => `${spaces.l}px`};
   list-style-type: none;
 `;
@@ -31,11 +36,11 @@ export const DayTitle = styled.label`
   margin-top: ${({ theme: { spaces } }) => `${spaces.xl}px`};
   color: ${({ theme: { colors } }) => `${colors.chromeBlack}`};
   flex: 1 1;
-  font-weight: 600;
+  font-weight: ${FONT_WEIGHT[600]};
 `;
 
 export const Temperature = styled.p`
-  font-weight: 600;
+  font-weight: ${FONT_WEIGHT[600]};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.xl}px`};
   flex: 1 1;
   width: auto;

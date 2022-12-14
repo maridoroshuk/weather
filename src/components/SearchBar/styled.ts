@@ -1,5 +1,5 @@
-import { WIDTH } from '@constants/sizes';
 import styled from 'styled-components';
+import { WIDTH } from '@constants/sizes';
 
 export const Container = styled.div`
     max-width: ${WIDTH[1080]};

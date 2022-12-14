@@ -19,7 +19,11 @@ interface IHourly {
 
 function Hourly({ hourlyList }: IHourly) {
   const data = getTodayHourlyForecast(hourlyList);
-
+  const renderLoader = () => {
+    if (!hourlyList) {
+      return <Loader />;
+    }
+  };
   return (
     <>
       <Label>Today</Label>
@@ -38,7 +42,7 @@ function Hourly({ hourlyList }: IHourly) {
           </Temperature>
         </Section>
       ))}
-      {!hourlyList && <Loader />}
+      {renderLoader()}
     </>
   );
 }

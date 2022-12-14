@@ -9,3 +9,9 @@ export const WIDTH = {
 export const HEIGHT = {
   40: '40px',
 };
+
+export const FONT_WEIGHT = {
+  500: 500,
+  600: 600,
+  700: 700,
+};

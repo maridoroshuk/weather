@@ -1,23 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { APIOptions, APIType } from '@customTypes/weather';
+import { v4 as uuidv4 } from 'uuid';
+import { APIType } from '@customTypes/weather';
 import { updateWeatherAPI } from '@store/features/weatherSlice';
-import {
-  Container,
-  Label,
-  RadioInput,
-  Title,
-  SelectWrapper,
-} from './styled';
+import useDispatchWeatherRequest from '@hooks/useDispatchWeatherRequest';
+import useCurrentLocation from '@hooks/useCurrentLocation';
+import { selectButtons } from '@constants/selectButtons';
+import { Container, Title, SelectWrapper } from './styled';
+import SelectButton from './SelectButton';
 
-interface ISwitchWeatherAPI {
-  onAPIChange: () => void;
-}
-
-function SwitchWeatherAPI({
-  onAPIChange,
-}: ISwitchWeatherAPI) {
+function SwitchWeatherAPI() {
   const dispatch = useDispatch();
+  const { currentLocation } = useCurrentLocation();
+  const dispatchWeatherRequest = useDispatchWeatherRequest(currentLocation);
+
   const { api } = useSelector(
     (state: {
       weather: {
@@ -25,34 +21,27 @@ function SwitchWeatherAPI({
       };
     }) => state.weather,
   );
+
   const handleAPIChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     dispatch(updateWeatherAPI({ api: e.target.value }));
-    onAPIChange();
+    dispatchWeatherRequest();
   };
   return (
     <Container>
       <Title>Weather service:</Title>
       <SelectWrapper>
-        <RadioInput
-          type="radio"
-          id="openWeather"
-          value={APIOptions.OPENWEATHER}
-          onChange={handleAPIChange}
-          checked={api === APIOptions.OPENWEATHER}
-        />
-        <Label htmlFor="openWeather">OpenWeather</Label>
-        <RadioInput
-          type="radio"
-          id="weatherBit"
-          value={APIOptions.WEATHERBIT}
-          onChange={handleAPIChange}
-          checked={api === APIOptions.WEATHERBIT}
-        />
-        <Label htmlFor="weatherBit">
-          WeatherBit (hourly)
-        </Label>
+        {selectButtons.map((button) => (
+          <SelectButton
+            key={uuidv4()}
+            id={button.id}
+            value={button.value}
+            handleOnCHange={handleAPIChange}
+            isChecked={api === button.value}
+            label={button.label}
+          />
+        ))}
       </SelectWrapper>
     </Container>
   );

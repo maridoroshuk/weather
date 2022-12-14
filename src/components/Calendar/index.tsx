@@ -51,28 +51,36 @@ function Calendar() {
     dispatch(setIsLoggedIn({ isLoggedIn: false }));
   };
 
-  return (
-    <Container>
-      {isLoggedIn && (
+  const renderEvents = () => {
+    if (events) {
+      return <Events events={events} />;
+    }
+    return <Text>You have no events for today ✅</Text>;
+  };
+
+  const renderLoginOrEvents = () => {
+    if (isLoggedIn) {
+      return (
         <Wrapper>
           <Title>Google Calender Events:</Title>
-          {events && <Events events={events} />}
-          {!events && <Text>You have no events for today ✅</Text>}
+          {renderEvents()}
           <Button
             onClick={handleLogoutClick}
             text="Logout"
           />
         </Wrapper>
-      )}
-      {!isLoggedIn && (
-        <Wrapper>
-          <Title>
-            Login with google to see your events
-          </Title>
-          <Button onClick={handleAuthClick} text="Login" />
-        </Wrapper>
-      )}
-    </Container>
-  );
+      );
+    }
+    return (
+      <Wrapper>
+        <Title>
+          Login with google to see your events
+        </Title>
+        <Button onClick={handleAuthClick} text="Login" />
+      </Wrapper>
+    );
+  };
+
+  return <Container>{renderLoginOrEvents()}</Container>;
 }
 export default Calendar;

@@ -24,10 +24,16 @@ function CurrentWeather() {
 
   const isDaily = api === APIOptions.OPENWEATHER;
 
+  const renderDailyOrHoulyWeather = () => {
+    if (isDaily) {
+      return <Daily temp={temp} code={code} />;
+    }
+    return <Hourly hourlyList={hourly} />;
+  };
+
   return (
     <Container>
-      {isDaily && <Daily temp={temp} code={code} />}
-      {!isDaily && <Hourly hourlyList={hourly} />}
+      {renderDailyOrHoulyWeather()}
     </Container>
   );
 }

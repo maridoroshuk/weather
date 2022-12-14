@@ -11,6 +11,9 @@ export const Container = styled.div`
 export const Title = styled.span`
   margin-right: ${({ theme: { spaces } }) => `${spaces.s}px`};
 `;
-export const RadioInput = styled.input``;
-export const Label = styled.label``;
-export const SelectWrapper = styled.div``;
+export const SelectWrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: ${({ theme: { spaces } }) => `${spaces.s}px`};
+`;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { WIDTH } from '@constants/sizes';
+import { WIDTH, FONT_WEIGHT } from '@constants/sizes';
 
 export const Container = styled.div`
   background-color: ${({ theme: { colors } }) => `${colors.whitesmoke}`};
@@ -18,7 +18,7 @@ export const Title = styled.p`
 `;
 
 export const DateString = styled.p`
-  font-weight: 700;
+  font-weight: ${FONT_WEIGHT[700]};
 `;
 
 export const DateContainer = styled.div`

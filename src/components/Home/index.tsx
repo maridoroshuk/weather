@@ -1,38 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 import SearchBar from '@components/SearchBar';
-import { weatherRequest } from '@store/features/weatherSlice';
 import SwitchWeatherAPI from '@components/SwitchWeatherAPI';
 import {
-  ICurrentLocation,
   IOptions,
 } from '@customTypes/weather';
-import getCurrentLocation from '@utils/getCurrentLocation';
 import Main from '@components/Main';
+import useDispatchWeatherRequest from '@hooks/useDispatchWeatherRequest';
+import useCurrentLocation from '@hooks/useCurrentLocation';
 import { Container } from './styled';
 
 function Home() {
-  const dispatch = useDispatch();
-
-  const [currentLocation, setCurrentLocation] = useState<ICurrentLocation | null>(null);
-
-  const dispatchWeatherRequest = () => {
-    if (currentLocation) {
-      dispatch(
-        weatherRequest({
-          search: {
-            lat: currentLocation.lat,
-            lon: currentLocation.lon,
-          },
-          city: currentLocation.currentCity,
-        }),
-      );
-    }
-  };
-
-  useEffect(() => {
-    getCurrentLocation(setCurrentLocation);
-  }, []);
+  const { currentLocation, setCurrentLocation } = useCurrentLocation();
+  const dispatchWeatherRequest = useDispatchWeatherRequest(currentLocation);
 
   useEffect(() => {
     dispatchWeatherRequest();
@@ -52,14 +31,9 @@ function Home() {
 
   return (
     <Container>
-      <SearchBar
-        onSearchChange={handleSearchChange}
-        currentLocation={currentLocation}
-      />
-      <SwitchWeatherAPI
-        onAPIChange={dispatchWeatherRequest}
-      />
-      <Main currentLocation={currentLocation} />
+      <SearchBar />
+      <SwitchWeatherAPI />
+      <Main />
     </Container>
   );
 }
