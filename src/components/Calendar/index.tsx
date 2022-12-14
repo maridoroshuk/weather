@@ -9,10 +9,10 @@ import {
 import { IEvent } from '@customTypes/calendar';
 import getApiCalendar from '@utils/getApiCalendar';
 import Events from './Events';
+import Button from './Button';
 import {
   Container, Text, Title, Wrapper,
 } from './styled';
-import Button from './Button';
 
 function Calendar() {
   const dispatch = useDispatch();
@@ -73,9 +73,7 @@ function Calendar() {
     }
     return (
       <Wrapper>
-        <Title>
-          Login with google to see your events
-        </Title>
+        <Title>Login with google to see your events</Title>
         <Button onClick={handleAuthClick} text="Login" />
       </Wrapper>
     );

@@ -10,7 +10,8 @@ const getWeatherOpenWeatherAPI = async (
   lon: number,
 ): Promise<ServerResponse> => {
   const response = await fetch(
-    `${OPEN_WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=metric`,
+    `${OPEN_WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${
+      process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=metric`,
   );
   const data = await response.json();
   const { temp } = data.main;
