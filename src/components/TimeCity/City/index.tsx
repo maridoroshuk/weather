@@ -6,7 +6,7 @@ interface ICityProps {
 }
 
 function City({ city }: ICityProps) {
-  return <CityContainer>{city}</CityContainer>;
+  return <CityContainer data-testid="city">{city}</CityContainer>;
 }
 
 export default City;

@@ -15,5 +15,7 @@ module.exports = {
     "^@assets(.*)$": "<rootDir>/src/assets$1",
     "^@utils(.*)$": "<rootDir>/src/utils$1",
     "^@theme(.*)$": "<rootDir>/src/theme$1",
+    "^@hooks(.*)$": "<rootDir>/src/hooks$1",
+    "^@mock(.*)$": "<rootDir>/src/__test__/mock$1",
   }
 };

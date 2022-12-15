@@ -26,7 +26,7 @@
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@assets/*": ["src/assets/*"],
+      "@mock/*": ["src/__test__/mock/*"],
     }
   },
   "include": ["src/**/*", "types.d.ts"],

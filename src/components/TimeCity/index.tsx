@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDate, getTime } from '@utils/date';
-import { Container, Section } from './styled';
 import Time from './Time';
 import City from './City';
+import { Container, Section } from './styled';
 
 interface ITimeCity {
   defaultCity: string | undefined;
@@ -36,7 +36,7 @@ function TimeCity({ defaultCity }: ITimeCity) {
   const day = getDate(date);
 
   return (
-    <Container>
+    <Container data-testid="timeCity">
       <Section>
         {time && day ? (
           <Time time={time} day={day} />

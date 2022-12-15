@@ -26,6 +26,7 @@ function Main({ currentLocation }: IMain) {
       style={{
         backgroundImage,
       }}
+      data-testid="main"
     >
       <TimeCity
         defaultCity={currentLocation?.currentCity}

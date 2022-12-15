@@ -11,14 +11,18 @@ interface ISearchBar {
   onSearchChange: (input: IOptions) => void;
   currentLocation: ICurrentLocation | null;
 }
-function SearchBar({ onSearchChange, currentLocation }: ISearchBar) {
+function SearchBar({
+  onSearchChange,
+  currentLocation,
+}: ISearchBar) {
   const [value, setValue] = useState<IOptions | null>(null);
 
   useEffect(() => {
     if (currentLocation) {
+      const { lat, lon, currentCity } = currentLocation;
       setValue({
-        value: `${currentLocation.lat} ${currentLocation.lon}`,
-        label: `${currentLocation.currentCity}`,
+        value: `${lat} ${lon}`,
+        label: `${currentCity}`,
       });
     }
   }, [currentLocation]);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { TimeContainer, DayContainer } from './styled';
 
 interface ITimeProps {
@@ -9,8 +9,8 @@ interface ITimeProps {
 function Time({ time, day }: ITimeProps) {
   return (
     <>
-      <TimeContainer>{time}</TimeContainer>
-      <DayContainer>{day}</DayContainer>
+      <TimeContainer data-testid="time">{time}</TimeContainer>
+      <DayContainer data-testid="day">{day}</DayContainer>
     </>
   );
 }

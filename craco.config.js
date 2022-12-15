@@ -25,6 +25,7 @@ module.exports = {
       '@theme': path.resolve(__dirname, 'src/theme'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@assets': path.resolve(__dirname, 'src/assets'),
+      '@mock': path.resolve(__dirname, '/src/__test__/mock/'),
     },
   },
 };

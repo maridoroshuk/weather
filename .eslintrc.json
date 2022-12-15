@@ -60,7 +60,8 @@
     "expect": false,
     "NodeJS": true,
     "google": true,
-    "JSX": true
+    "JSX": true,
+    "jest": true
   },
 
   "parser": "@typescript-eslint/parser",

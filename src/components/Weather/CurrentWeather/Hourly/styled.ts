@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Section = styled.div`
+export const Container = styled.ul`
+  list-style-type: none;
+`;
+
+export const Section = styled.li`
   text-align: center;
   display: flex;
   justify-content: space-between;

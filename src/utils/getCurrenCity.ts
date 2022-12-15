@@ -5,7 +5,8 @@ const getCurrenCity = async (
   longitude: number,
 ) => {
   const res = await fetch(
-    `${GEO_APIFY_URL}/reverse?lat=${latitude}&lon=${longitude}&format=json&apiKey=${process.env.REACT_APP_GEO_APIFY_API_KEY}`,
+    `${GEO_APIFY_URL}/reverse?lat=${latitude}&lon=${longitude}&format=json&apiKey=${
+      process.env.REACT_APP_GEO_APIFY_API_KEY}`,
   );
   const data = await res.json();
   const { country_code, county } = data.results[0];

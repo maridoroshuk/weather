@@ -21,6 +21,7 @@ function SelectButton({
   return (
     <>
       <RadioInput
+        data-testid={id}
         type="radio"
         id={id}
         value={value}

@@ -24,7 +24,7 @@ class ErrorBoundary extends React.Component<IError> {
     const { children } = this.props;
     if (hasError) {
       return (
-        <Container>
+        <Container data-testid="errorBoundary">
           Oops... Something went wrong :(
         </Container>
       );
