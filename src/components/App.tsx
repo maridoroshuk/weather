@@ -1,10 +1,10 @@
 import React from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 import Home from '@components/Home';
+import ErrorBoundary from '@components//ErrorBoundary';
 import { ThemeProvider } from 'styled-components';
 import { persistor } from '@store/store';
 import { theme } from '@theme/index';
-import ErrorBoundary from './ErrorBoundary';
 
 function App() {
   return (
