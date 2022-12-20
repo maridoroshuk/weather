@@ -13,11 +13,15 @@ import store from '@store/store';
 import SearchBar from '@components/SearchBar';
 import { IOptions } from '@customTypes/weather';
 import { currentLocation } from '@mock/weather';
+import { SingleValue } from 'react-select';
 
 describe('render SearchBar component', () => {
-  let handleSearchChange: (input: IOptions) => void;
+  let handleSearchChange: (
+    input: SingleValue<IOptions>,
+  ) => void;
   beforeEach(() => {
-    handleSearchChange = (input: IOptions) => fireEvent.change(screen.getByText(input.label));
+    handleSearchChange = (input: SingleValue<IOptions>) =>
+      fireEvent.change(screen.getByText(input!.label));
     render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
@@ -39,7 +43,8 @@ describe('render SearchBar component', () => {
     });
     it('should render and input text', async () => {
       const element = screen.queryByText(userInput);
-      await waitFor(() => expect(element).toBeInTheDocument());
+      await waitFor(() =>
+        expect(element).toBeInTheDocument());
     });
   });
 });

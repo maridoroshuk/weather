@@ -5,11 +5,15 @@ import ErrorBoundary from '@components//ErrorBoundary';
 import { ThemeProvider } from 'styled-components';
 import { persistor } from '@store/store';
 import { theme } from '@theme/index';
+import Loader from './Loader';
 
 function App() {
   return (
     <ErrorBoundary>
-      <PersistGate persistor={persistor}>
+      <PersistGate
+        persistor={persistor}
+        loading={<Loader />}
+      >
         <ThemeProvider theme={theme}>
           <Home />
         </ThemeProvider>

@@ -5,12 +5,14 @@ import {
   IOptions,
 } from '@customTypes/weather';
 import filterCities from '@utils/filterCities';
+import { SingleValue } from 'react-select';
 import { Container } from './styled';
 
 interface ISearchBar {
-  onSearchChange: (input: IOptions) => void;
+  onSearchChange: (input: SingleValue<IOptions> | null) => void;
   currentLocation: ICurrentLocation | null;
 }
+
 function SearchBar({
   onSearchChange,
   currentLocation,
@@ -40,7 +42,7 @@ function SearchBar({
     setValue(null);
   };
 
-  const onChangeHandler = (input: any) => {
+  const onChangeHandler = (input: SingleValue<IOptions>) => {
     setValue(input);
     onSearchChange(input);
     setValue(null);

@@ -1,26 +1,23 @@
 import React from 'react';
 import {
   APIOptions,
-  IForcastHourly,
 } from '@customTypes/weather';
 import { useSelector } from 'react-redux';
+import {
+  selectHourlyForecast,
+  selectIcon,
+  selectTemp,
+  selectWeatherApi,
+} from '@store/selectors/weather';
 import Daily from './Daily';
 import Hourly from './Hourly';
 import { Container } from './styled';
 
 function CurrentWeather() {
-  const {
-    api, temp, icon, hourly,
-  } = useSelector(
-    (state: {
-      weather: {
-        api: APIOptions;
-        temp: number;
-        icon: string;
-        hourly: IForcastHourly[];
-      };
-    }) => state.weather,
-  );
+  const api = useSelector(selectWeatherApi);
+  const temp = useSelector(selectTemp);
+  const icon = useSelector(selectIcon);
+  const hourly = useSelector(selectHourlyForecast);
 
   const isDaily = api === APIOptions.OPENWEATHER;
 

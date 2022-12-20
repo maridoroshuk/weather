@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ApiCalendar from 'react-google-calendar-api';
 import {
   getEventsRequest,
   setApiCalendar,
   setIsLoggedIn,
 } from '@store/features/calendarSlice';
-import { IEvent } from '@customTypes/calendar';
 import getApiCalendar from '@utils/getApiCalendar';
+import {
+  selectApiCalendar,
+  selectEvents,
+  selectLogin,
+} from '@store/selectors/calendar';
 import Events from './Events';
 import Button from './Button';
 import {
@@ -17,15 +20,9 @@ import {
 function Calendar() {
   const dispatch = useDispatch();
 
-  const { events, apiCalendar, isLoggedIn } = useSelector(
-    (state: {
-      calendar: {
-        events: IEvent[] | null;
-        isLoggedIn: boolean;
-        apiCalendar: ApiCalendar;
-      };
-    }) => state.calendar,
-  );
+  const events = useSelector(selectEvents);
+  const isLoggedIn = useSelector(selectLogin);
+  const apiCalendar = useSelector(selectApiCalendar);
 
   useEffect(() => {
     dispatch(
@@ -35,9 +32,9 @@ function Calendar() {
 
   const handleAuthClick = () => {
     apiCalendar.handleAuthClick();
-    apiCalendar.tokenClient.callback = async (
-      resp: any,
-    ) => {
+    apiCalendar.tokenClient.callback = async (resp: {
+      error: string | undefined;
+    }) => {
       if (resp.error !== undefined) {
         throw resp;
       }
@@ -56,7 +53,7 @@ function Calendar() {
       {isLoggedIn ? (
         <Wrapper>
           <Title>Google Calender Events:</Title>
-          {events ? (
+          {events && events?.length > 0 ? (
             <Events events={events} />
           ) : (
             <Text>You have no events for today ✅</Text>

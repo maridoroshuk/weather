@@ -6,6 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h3`
+margin: ${({ theme: { spaces } }) => `${spaces.l}px`};
   color: ${({ theme: { colors } }) => `${colors.blue}`};
   font-size: ${({ theme: { fontSizes } }) => `${fontSizes.l}px`};
 `;

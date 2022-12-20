@@ -5,19 +5,14 @@ import TimeCity from '@components/TimeCity';
 import Calendar from '@components/Calendar';
 import { ICurrentLocation } from '@customTypes/weather';
 import getBackgroundImage from '@utils/getBackgroundImage';
+import { selectIcon } from '@store/selectors/weather';
 import { Wrapper } from './styled';
 
 interface IMain {
   currentLocation: ICurrentLocation | null;
 }
 function Main({ currentLocation }: IMain) {
-  const { icon } = useSelector(
-    (state: {
-      weather: {
-        icon: string | null;
-      };
-    }) => state.weather,
-  );
+  const icon = useSelector(selectIcon);
 
   const backgroundImage = getBackgroundImage(icon);
 

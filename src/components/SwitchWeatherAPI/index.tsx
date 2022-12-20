@@ -8,6 +8,7 @@ import {
 import { updateWeatherAPI } from '@store/features/weatherSlice';
 import useDispatchWeatherRequest from '@hooks/useDispatchWeatherRequest';
 import { selectButtons } from '@constants/selectButtons';
+import { selectWeatherApi } from '@store/selectors/weather';
 import SelectButton from './SelectButton';
 import { Container, Title, SelectWrapper } from './styled';
 
@@ -20,13 +21,7 @@ function SwitchWeatherAPI({
   const dispatch = useDispatch();
   const dispatchWeatherRequest = useDispatchWeatherRequest(currentLocation);
 
-  const { api } = useSelector(
-    (state: {
-      weather: {
-        api: APIType;
-      };
-    }) => state.weather,
-  );
+  const api = useSelector(selectWeatherApi);
 
   const handleAPIChange = (
     e: React.ChangeEvent<HTMLInputElement>,

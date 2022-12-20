@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDate, getTime } from '@utils/date';
+import { selectCity } from '@store/selectors/weather';
 import Time from './Time';
 import City from './City';
 import { Container, Section } from './styled';
@@ -13,13 +14,7 @@ function TimeCity({ defaultCity }: ITimeCity) {
   const [date, setDate] = useState(() => new Date());
   const timer = useRef<null | NodeJS.Timeout>(null);
 
-  const city = useSelector(
-    (state: {
-      weather: {
-        city: string | null;
-      };
-    }) => state.weather.city,
-  );
+  const city = useSelector(selectCity);
 
   useEffect(() => {
     timer.current = setInterval(() => {
