@@ -2,6 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { IForecastDaily } from 'src/customTypes/weather';
 import forecastDays from '@utils/forecastDays';
+import { OPEN_WEATHER_IMAGE } from '@constants/api';
 import {
   Container,
   DailyItem,
@@ -24,7 +25,7 @@ function Forecast({ forecast }: IForecast) {
             {item.weather[0].icon && (
               <WeatherIconSmall
                 alt="weather"
-                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                src={`${OPEN_WEATHER_IMAGE}/${item.weather[0].icon}@2x.png`}
               />
             )}
             <Temperature>

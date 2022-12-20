@@ -1,4 +1,5 @@
 import React from 'react';
+import { OPEN_WEATHER_IMAGE } from '@constants/api';
 import {
   Label,
   Section,
@@ -12,7 +13,7 @@ interface IDaily {
 }
 
 function Daily({ temp, icon }: IDaily) {
-  const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  const iconUrl = `${OPEN_WEATHER_IMAGE}/${icon}@2x.png`;
   const roundTemp = Math.round(temp);
   return (
     <>

@@ -4,6 +4,7 @@ import { IForcastHourly } from '@customTypes/weather';
 import Loader from '@components/Loader';
 import { getLocalTime } from '@utils/date';
 import getTodayHourlyForecast from '@utils/getTodayHourlyForecast';
+import { WEATHERBIT_IMAGE } from '@constants/api';
 import {
   Container,
   Label,
@@ -33,7 +34,7 @@ function Hourly({ hourlyList }: IHourly) {
             <Time>{getLocalTime(timestamp_local)}</Time>
             <WeatherIcon
               alt="weather"
-              src={`https://www.weatherbit.io/static/img/icons/${weather.icon}.png`}
+              src={`${WEATHERBIT_IMAGE}/${weather.icon}.png`}
             />
             <Temperature>
               {Math.round(app_temp)}
