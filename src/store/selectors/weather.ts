@@ -3,6 +3,7 @@ import {
   IForcastHourly,
   IForecastDaily,
 } from '@customTypes/weather';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const selectWeatherApi = (state: {
   weather: {
@@ -45,3 +46,18 @@ export const selectLoading = (state: {
     isLoading: boolean;
   };
 }) => state.weather.isLoading;
+
+export const selectCurrenWeather = createSelector(
+  [
+    selectWeatherApi,
+    selectTemp,
+    selectIcon,
+    selectHourlyForecast,
+  ],
+  (api, temp, icon, hourly) => ({
+    api,
+    temp,
+    icon,
+    hourly,
+  }),
+);
